@@ -11,11 +11,9 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         math: resolve(__dirname, 'math.html'),
-        english: resolve(__dirname, 'english.html'),
         biology: resolve(__dirname, 'biology.html'),
         chemistry: resolve(__dirname, 'chemistry.html'),
-        physics: resolve(__dirname, 'physics.html'),
-        urdu: resolve(__dirname, 'urdu.html')
+        physics: resolve(__dirname, 'physics.html')
       }
     }
   }

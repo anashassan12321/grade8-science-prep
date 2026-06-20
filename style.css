@@ -3,7 +3,7 @@
 
 body {
     font-family: 'Nunito', sans-serif;
-    background-color: #020617; /* slate-950 — darkest possible so the page edges blend */
+    background-color: #020617; /* slate-950 */
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -13,7 +13,7 @@ body {
 }
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .slide-in-right {
@@ -21,7 +21,7 @@ body {
 }
 @keyframes slideInRight {
     from { opacity: 0; transform: translateX(20px); }
-    to { opacity: 1; transform: translateX(0); }
+    to   { opacity: 1; transform: translateX(0); }
 }
 
 /* Hide scrollbar but keep functionality */
@@ -33,23 +33,9 @@ body {
     scrollbar-width: none;
 }
 
-/* Q&A Accordion transition — CSS grid trick so long answers are never clipped */
-.answer-content {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.3s ease;
-}
-.qa-card.open .answer-content {
-    grid-template-rows: 1fr;
-}
-.answer-inner {
-    overflow: hidden;
-    min-height: 0;
-}
-
 /* Glass effect header (dark) */
 .glass-header {
-    background: rgba(15, 23, 42, 0.85);   /* slate-900 w/ opacity */
+    background: rgba(15, 23, 42, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
