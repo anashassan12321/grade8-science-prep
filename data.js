@@ -246,7 +246,7 @@ export const appData = {
     },
     chemistry: {
         title: "Chemistry",
-        subtitle: "Atoms, Metals, Acids & Bases",
+        subtitle: "Atoms & Molecules, Metals & Non-Metals, Acids & Bases",
         icon: "🧪",
         themeText: "text-purple-400",
         themeBg: "bg-purple-500/15",
@@ -256,44 +256,50 @@ export const appData = {
             {
                 title: "Atoms & Molecules",
                 emoji: "⚛️",
-                definition: "Atoms are the tiny pieces that everything in the world is made of. A molecule is two or more atoms stuck together.",
+                definition: "Atoms are the tiny pieces that everything in the world is made of. A molecule is two or more atoms stuck together. Atoms are SO small that millions of them could fit on the tip of a needle.",
                 facts: [
-                    "<b>Atom:</b> The tiniest piece of an element that can take part in a chemical change (a reaction).",
-                    "<b>Molecule:</b> Two or more atoms stuck together (e.g. O₂, H₂O, CO₂).",
-                    "<b>Element:</b> Made of only one kind of atom (e.g. pure gold = only Au atoms).",
-                    "<b>Compound:</b> Two or more <i>different</i> elements stuck together (e.g. H₂O = hydrogen + oxygen)."
+                    "<b>Atom:</b> The tiniest piece of an element that can take part in a chemical change (a reaction). It has a nucleus (centre) made of protons + neutrons, with electrons orbiting around it.",
+                    "<b>Molecule:</b> Two or more atoms stuck together by chemical bonds (e.g. O₂, H₂O, CO₂).",
+                    "<b>Element:</b> Made of only ONE kind of atom — about 118 are known (e.g. pure gold = only Au atoms).",
+                    "<b>Compound:</b> Two or more <i>different</i> elements chemically joined (e.g. H₂O = hydrogen + oxygen, NaCl = sodium + chlorine = table salt).",
+                    "<b>Mixture vs compound:</b> In a mixture the substances keep their own properties (e.g. salt water); in a compound the new substance has totally new properties (e.g. NaCl looks nothing like sodium or chlorine!).",
+                    "<b>Chemical formula:</b> A short way to write a molecule using element symbols + small numbers (e.g. H₂O = 2 hydrogen + 1 oxygen)."
                 ],
                 eli5: "Atoms are the tiny invisible LEGO blocks of the universe. Everything is made of them! When you snap two or more of these blocks together, you create a molecule. If the blocks are different colours, you've made a compound!"
             },
             {
                 title: "Metals & Non-Metals",
                 emoji: "🔩",
-                definition: "Elements are sorted into metals and non-metals based on what they look like and how they behave.",
+                definition: "Elements are sorted into metals and non-metals based on what they look like, how they feel, and how they behave.",
                 facts: [
-                    "<b>Metals:</b> Shiny, malleable (can be hammered flat into sheets), ductile (can be pulled into wires), and good conductors of heat & electricity.",
-                    "<b>Non-metals:</b> Usually dull, brittle (break easily if solid), and POOR conductors of heat & electricity.",
-                    "<b>Metal examples:</b> Iron (Fe), Copper (Cu), Aluminium (Al), Gold (Au).",
-                    "<b>Non-metal examples:</b> Oxygen (O), Sulfur (S), Carbon (C), Nitrogen (N)."
+                    "<b>Metal properties:</b> Shiny (lustrous), <i>malleable</i> (hammered into sheets), <i>ductile</i> (drawn into wires), <i>sonorous</i> (ring when struck), and good conductors of heat & electricity.",
+                    "<b>Non-metal properties:</b> Usually dull, <i>brittle</i> (break easily if solid), and POOR conductors of heat & electricity. Many are gases at room temperature.",
+                    "<b>Common metals:</b> Iron (Fe) — bridges, cars; Copper (Cu) — wires, coins; Aluminium (Al) — foil, planes; Gold (Au) — jewellery; Silver (Ag) — mirrors.",
+                    "<b>Common non-metals:</b> Oxygen (O) — breathing; Sulfur (S) — match heads; Carbon (C) — pencils; Nitrogen (N) — 78 % of air; Hydrogen (H) — rockets.",
+                    "<b>Alloys:</b> Metals mixed together to be stronger — e.g. <i>steel</i> (iron + carbon), <i>brass</i> (copper + zinc), <i>bronze</i> (copper + tin).",
+                    "<b>Sonorous means…</b> it makes a ringing sound when you hit it — that's how you tell metals apart from many non-metals."
                 ],
                 eli5: "Metals are like superhero materials — strong, shiny, and they let electricity zoom right through them. Non-metals are more like wood or chalk — dull and they BLOCK electricity."
             },
             {
                 title: "Acids & Bases",
                 emoji: "🍋",
-                definition: "Acids and bases are chemical opposites that react with each other. Their strength is measured on the pH scale (0 = most acidic, 14 = most basic).",
+                definition: "Acids and bases are chemical opposites. Their strength is measured on the pH scale (0 = most acidic, 7 = neutral, 14 = most basic).",
                 facts: [
-                    "<b>Acid:</b> Makes hydrogen ions (H⁺, tiny positively-charged particles) in water. pH < 7. Usually tastes sour.",
-                    "<b>Base:</b> Makes hydroxide ions (OH⁻, tiny negatively-charged particles) in water. pH > 7. Usually feels soapy/slippery.",
-                    "<b>Neutral:</b> pH = 7 (e.g. pure water).",
+                    "<b>Acid:</b> Makes hydrogen ions (H⁺, tiny positively-charged particles) in water. pH < 7. Usually tastes sour. Examples: lemon juice, vinegar, HCl in your stomach.",
+                    "<b>Base (alkali):</b> Makes hydroxide ions (OH⁻, tiny negatively-charged particles) in water. pH > 7. Usually feels soapy/slippery. Examples: soap, baking soda, bleach.",
+                    "<b>Neutral:</b> pH = 7 — neither acidic nor basic. Pure water is pH 7.",
                     "<b>Litmus test:</b> Acid turns blue litmus paper RED. Base turns red litmus paper BLUE.",
-                    "<b>Neutralisation:</b> When you mix an acid and a base together, they cancel each other out and make <i>salt + water</i>."
+                    "<b>Universal indicator:</b> A liquid that turns different colours at different pH — red (acidic) → orange/yellow → green (neutral) → blue → purple (very basic).",
+                    "<b>Neutralisation:</b> When you mix an acid and a base together, they cancel each other out and make <i>salt + water</i>. This is exactly what antacid tablets do in your tummy!",
+                    "<b>Everyday pH:</b> Battery acid ≈ 0, lemon juice ≈ 2, orange juice ≈ 3, water = 7, baking soda ≈ 9, bleach ≈ 13."
                 ],
-                eli5: "Acids usually taste sour, like lemon juice or vinegar. Bases feel slippery, like soap. They are chemical opposites! Special litmus paper turns red in acids and blue in bases."
+                eli5: "Acids usually taste sour, like lemon juice or vinegar. Bases feel slippery, like soap. They are chemical opposites! Special litmus paper turns red in acids and blue in bases. When you mix them, they cancel each other out and make salt + water."
             }
         ],
         testPool: {
             mcqs: [
-                // Atoms (8)
+                // Atoms & Molecules (10)
                 { q: "The smallest piece of an element is called…", options: ["A molecule", "An atom", "A compound", "A cell"], correct: 1, topic: "Atoms" },
                 { q: "A molecule is…", options: ["One atom", "Two or more atoms joined together", "A type of cell", "A solid"], correct: 1, topic: "Atoms" },
                 { q: "Water (H₂O) is an example of…", options: ["An element", "A molecule", "An atom", "A proton"], correct: 1, topic: "Atoms" },
@@ -302,8 +308,10 @@ export const appData = {
                 { q: "The chemical formula for water is…", options: ["HO", "H₂O", "H₂O₂", "O₂"], correct: 1, topic: "Atoms" },
                 { q: "How many atoms are in one molecule of CO₂?", options: ["1", "2", "3", "4"], correct: 2, topic: "Atoms" },
                 { q: "Which is an element?", options: ["Water", "Salt", "Gold (Au)", "Sugar"], correct: 2, topic: "Atoms" },
+                { q: "What is the difference between a mixture and a compound?", options: ["No difference", "Mixture keeps each substance's properties; compound has new ones", "Mixture is always a liquid", "Compound is only found in labs"], correct: 1, topic: "Atoms" },
+                { q: "Table salt (NaCl) is an example of…", options: ["An element", "A mixture", "A compound", "A molecule of one element"], correct: 2, topic: "Atoms" },
 
-                // Metals (8)
+                // Metals & Non-Metals (10)
                 { q: "Which is a property of metals?", options: ["Dull", "Shiny", "Poor conductor", "Brittle"], correct: 1, topic: "Metals" },
                 { q: "Which is a non-metal?", options: ["Iron", "Copper", "Oxygen", "Gold"], correct: 2, topic: "Metals" },
                 { q: "Malleable means…", options: ["Can break easily", "Can be hammered into sheets", "Conducts electricity", "Is shiny"], correct: 1, topic: "Metals" },
@@ -312,8 +320,10 @@ export const appData = {
                 { q: "Non-metals are usually…", options: ["Shiny", "Ductile", "Dull", "Malleable"], correct: 2, topic: "Metals" },
                 { q: "Which is a metal?", options: ["Sulfur", "Oxygen", "Aluminum", "Carbon"], correct: 2, topic: "Metals" },
                 { q: "Plastic is a good…", options: ["Conductor", "Insulator", "Magnet", "Battery"], correct: 1, topic: "Metals" },
+                { q: "Which of these is an alloy?", options: ["Pure gold", "Steel", "Oxygen", "Salt"], correct: 1, topic: "Metals" },
+                { q: "Sonorous means…", options: ["Silent", "Makes a ringing sound when hit", "Heavy", "Magnetic"], correct: 1, topic: "Metals" },
 
-                // Acids (9)
+                // Acids & Bases (10)
                 { q: "An acid usually tastes…", options: ["Sweet", "Bitter", "Sour", "Salty"], correct: 2, topic: "Acids" },
                 { q: "A base usually feels…", options: ["Slimy/soapy", "Dry", "Hot", "Cold"], correct: 0, topic: "Acids" },
                 { q: "The pH of a neutral substance is…", options: ["0", "7", "14", "1"], correct: 1, topic: "Acids" },
@@ -322,19 +332,22 @@ export const appData = {
                 { q: "When you mix an acid and a base, you get…", options: ["More acid", "Salt + water", "Only water", "A gas"], correct: 1, topic: "Acids" },
                 { q: "Which is an acid?", options: ["Soap", "Baking soda", "Lemon juice", "Milk of magnesia"], correct: 2, topic: "Acids" },
                 { q: "pH less than 7 means the substance is…", options: ["Basic", "Neutral", "Acidic", "Salty"], correct: 2, topic: "Acids" },
-                { q: "Hydroxide ions (OH⁻) are found in…", options: ["Acids", "Bases", "Pure water", "Salt only"], correct: 1, topic: "Acids" }
+                { q: "Hydroxide ions (OH⁻) are found in…", options: ["Acids", "Bases", "Pure water", "Salt only"], correct: 1, topic: "Acids" },
+                { q: "What colour does universal indicator turn in a strong base?", options: ["Red", "Yellow", "Green", "Purple"], correct: 3, topic: "Acids" }
             ],
             shortQs: [
-                { q: "What is an atom?", a: "An atom is the tiniest piece of an element that still behaves like that element. Everything in the world is made of atoms.", topic: "Atoms" },
+                { q: "What is an atom?", a: "An atom is the tiniest piece of an element that still behaves like that element. It has a nucleus (protons + neutrons) with electrons orbiting around it. Everything in the world is made of atoms.", topic: "Atoms" },
                 { q: "What is a molecule? Give two examples.", a: "A molecule is two or more atoms stuck together. Examples: O₂ (oxygen gas), H₂O (water), CO₂ (carbon dioxide).", topic: "Atoms" },
                 { q: "What is the difference between an element and a compound?", a: "An element is made of only one kind of atom (e.g. pure gold). A compound is made of two or more DIFFERENT kinds of atoms joined together (e.g. water = hydrogen + oxygen).", topic: "Atoms" },
-                { q: "Name three properties of metals.", a: "Shiny, malleable (hammered into sheets), ductile (drawn into wires), good conductors of heat and electricity.", topic: "Metals" },
-                { q: "Name three examples of metals.", a: "Iron (Fe), Copper (Cu), Aluminium (Al), Gold (Au), Silver (Ag) — any three from this list.", topic: "Metals" },
-                { q: "What is the difference between a conductor and an insulator?", a: "A conductor lets electricity pass through it easily (e.g. copper). An insulator blocks electricity (e.g. plastic, rubber, wood).", topic: "Metals" },
-                { q: "What does litmus paper do?", a: "Litmus paper is a special coloured paper that tells you if a substance is an acid or a base. Acid turns blue litmus RED; base turns red litmus BLUE.", topic: "Acids" },
-                { q: "What is an acid? Give one example.", a: "An acid is a substance that makes hydrogen ions (H⁺) in water. It usually tastes sour. Examples: lemon juice, vinegar, HCl.", topic: "Acids" },
-                { q: "What is a base? Give one example.", a: "A base is a substance that makes hydroxide ions (OH⁻) in water. It usually feels soapy/slippery. Examples: soap, baking soda, milk of magnesia.", topic: "Acids" },
-                { q: "What happens during neutralisation?", a: "When you mix an acid and a base together, they cancel each other out. The products are a SALT and WATER, and the mixture is no longer acidic or basic (it becomes neutral, pH 7).", topic: "Acids" }
+                { q: "What is the difference between a mixture and a compound?", a: "In a mixture, the substances keep their own properties (e.g. salt dissolved in water). In a compound, the substances combine to make a NEW substance with totally new properties (e.g. sodium + chlorine → table salt).", topic: "Atoms" },
+                { q: "Name three properties of metals.", a: "Shiny, malleable (hammered into sheets), ductile (drawn into wires), good conductors of heat and electricity, sonorous (ring when struck).", topic: "Metals" },
+                { q: "Name three examples of metals AND three of non-metals.", a: "Metals: Iron (Fe), Copper (Cu), Aluminium (Al). Non-metals: Oxygen (O), Sulfur (S), Carbon (C).", topic: "Metals" },
+                { q: "What is the difference between a conductor and an insulator? Give one example of each.", a: "A conductor lets electricity pass through it easily (e.g. copper wire). An insulator blocks electricity (e.g. plastic coating on a wire).", topic: "Metals" },
+                { q: "What does litmus paper do, and how does it respond to acids vs bases?", a: "Litmus paper is a special coloured paper that tells you if a substance is an acid or a base. Acid turns blue litmus RED; base turns red litmus BLUE.", topic: "Acids" },
+                { q: "What is an acid? Give two examples.", a: "An acid is a substance that makes hydrogen ions (H⁺) in water. It usually tastes sour. Examples: lemon juice, vinegar, HCl in the stomach.", topic: "Acids" },
+                { q: "What is a base? Give two examples.", a: "A base is a substance that makes hydroxide ions (OH⁻) in water. It usually feels soapy/slippery. Examples: soap, baking soda, milk of magnesia.", topic: "Acids" },
+                { q: "What happens during neutralisation?", a: "When you mix an acid and a base together, they cancel each other out. The products are a SALT and WATER, and the mixture becomes neutral (pH 7).", topic: "Acids" },
+                { q: "Why do people take antacid tablets for heartburn?", a: "Heartburn is caused by excess acid in the stomach. Antacid tablets are BASES (bases neutralize acids), so they cancel out the excess acid and bring the pH back up to a comfortable level.", topic: "Acids" }
             ]
         }
     },
