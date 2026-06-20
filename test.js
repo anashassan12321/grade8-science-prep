@@ -22,6 +22,38 @@ function shuffleOptions(mcq) {
     };
 }
 
+// Animate a number from 0 → target with ease-out cubic
+function animateNumber(el, target, duration = 900, suffix = '') {
+    const start = performance.now();
+    function tick(now) {
+        const t = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = Math.round(target * eased) + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+}
+
+// Confetti burst — only on good scores (>= 75%)
+function spawnConfetti(pieces = 60) {
+    const colors = ['#f59e0b', '#ec4899', '#8b5cf6', '#10b981', '#3b82f6', '#f43f5e', '#fbbf24'];
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < pieces; i++) {
+        const p = document.createElement('div');
+        p.className = 'confetti-piece';
+        p.style.left = Math.random() * 100 + 'vw';
+        p.style.background = colors[Math.floor(Math.random() * colors.length)];
+        p.style.animationDelay = (Math.random() * 0.4) + 's';
+        p.style.animationDuration = (2 + Math.random() * 2) + 's';
+        p.style.transform = `rotate(${Math.random() * 360}deg)`;
+        frag.appendChild(p);
+    }
+    document.body.appendChild(frag);
+    setTimeout(() => {
+        document.querySelectorAll('.confetti-piece').forEach(p => p.remove());
+    }, 5000);
+}
+
 // ─── read subject from URL ──────────────────────────────────────────────────
 const params = new URLSearchParams(window.location.search);
 const subjectKey = params.get('subject') || 'math';
@@ -41,24 +73,24 @@ document.getElementById('back-btn').onclick = () => {
 
 // ─── state ──────────────────────────────────────────────────────────────────
 const state = {
-    phase: 'setup',                  // setup | part1 | part1Done | part2 | result
+    phase: 'setup',
     mcqCount: 25,
-    testSize: 'hard',                // small | medium | hard (for non-math)
+    testSize: 'hard',
     mcqs: [],
     shortQs: [],
     currentMCQ: 0,
     currentShortQ: 0,
     part1Correct: 0,
     part2Correct: 0,
-    mcqSelected: -1,                 // index of option the user clicked (before submit)
+    mcqSelected: -1,
     mcqSubmitted: false,
     shortRevealed: false,
-    shortSelfMarked: null            // true = user said "yes", false = "no"
+    shortSelfMarked: null
 };
 
 function getConfig() {
     if (subjectKey === 'math') {
-        return { mcqs: state.mcqCount, shortQs: 10 };
+        return { mcqs: state.mcqCount, shortQs: 0 };
     }
     return ({
         small:  { mcqs: 10, shortQs: 5  },
@@ -71,7 +103,7 @@ function getConfig() {
 function startTest() {
     const cfg = getConfig();
     state.mcqs       = shuffle(subject.testPool.mcqs).slice(0, cfg.mcqs).map(shuffleOptions);
-    state.shortQs    = shuffle(subject.testPool.shortQs).slice(0, cfg.shortQs);
+    state.shortQs    = shuffle(subject.testPool.shortQs || []).slice(0, cfg.shortQs);
     state.part1Correct = 0;
     state.part2Correct = 0;
     state.currentMCQ   = 0;
@@ -87,12 +119,34 @@ function startTest() {
 // ─── renderers ──────────────────────────────────────────────────────────────
 function render() {
     const c = document.getElementById('test-content');
+    c.classList.remove('fade-in');
+    // Force reflow to restart the fade-in animation on phase changes
+    void c.offsetWidth;
+    c.classList.add('fade-in');
     if (state.phase === 'setup')        c.innerHTML = renderSetup();
     else if (state.phase === 'part1')    c.innerHTML = renderPart1();
     else if (state.phase === 'part1Done')c.innerHTML = renderPart1Done();
     else if (state.phase === 'part2')    c.innerHTML = renderPart2();
     else if (state.phase === 'result')   c.innerHTML = renderResult();
     bindEvents();
+
+    // Side-effects on phase entry
+    if (state.phase === 'result' && state.part1Correct > 0) {
+        animateScoreNumbers();
+        const totalCorrect = state.part1Correct + state.part2Correct;
+        const totalQ = state.mcqs.length + state.shortQs.length;
+        const pctVal = Math.round((totalCorrect / totalQ) * 100);
+        if (pctVal >= 75) spawnConfetti(80);
+    }
+}
+
+function animateScoreNumbers() {
+    const c = document.getElementById('test-content');
+    const counters = c.querySelectorAll('[data-counter]');
+    counters.forEach(el => {
+        const target = Number(el.dataset.counter);
+        animateNumber(el, target, 900);
+    });
 }
 
 function pct(correct, total) {
@@ -113,13 +167,13 @@ function renderSetup() {
     if (isMath) {
         const sizes = [10, 15, 20, 25, 30, 35, 40, 45, 50];
         sizeBlock = `
-            <div class="bg-slate-800 rounded-2xl p-5 border border-slate-700 shadow-lg">
+            <div class="bg-slate-800 rounded-2xl p-5 border border-slate-700 shadow-lg slide-in-right">
                 <h3 class="font-bold text-slate-100 mb-1">How many MCQs?</h3>
                 <p class="text-sm text-slate-400 mb-4">Up to <b class="text-rose-400">50</b> available.</p>
                 <div id="size-grid" class="grid grid-cols-5 gap-2">
                     ${sizes.map(n => `
                         <button data-count="${n}"
-                                class="size-btn py-3 rounded-xl font-bold text-sm transition-all border
+                                class="size-btn tap-scale py-3 rounded-xl font-bold text-sm transition-all border
                                 ${n === state.mcqCount
                                     ? `bg-rose-500 text-white border-rose-400 shadow-md`
                                     : `bg-slate-900/60 text-slate-300 border-slate-700 hover:border-slate-500`}">
@@ -137,13 +191,13 @@ function renderSetup() {
             { key: 'hard',   label: 'Hard',   mcqs: 25, shortQs: 10, emoji: '🔴' }
         ];
         sizeBlock = `
-            <div class="bg-slate-800 rounded-2xl p-5 border border-slate-700 shadow-lg">
+            <div class="bg-slate-800 rounded-2xl p-5 border border-slate-700 shadow-lg slide-in-right">
                 <h3 class="font-bold text-slate-100 mb-1">Choose test size</h3>
                 <p class="text-sm text-slate-400 mb-4">Each test has two parts: MCQs then short questions.</p>
                 <div id="size-grid" class="space-y-3">
                     ${sizes.map(s => `
                         <button data-size="${s.key}"
-                                class="size-btn w-full p-4 rounded-xl font-bold transition-all border flex items-center gap-3 text-left
+                                class="size-btn tap-scale w-full p-4 rounded-xl font-bold transition-all border flex items-center gap-3 text-left
                                 ${s.key === state.testSize
                                     ? `${subject.themeBg} ${subject.themeText} border-current shadow-md`
                                     : `bg-slate-900/60 text-slate-300 border-slate-700 hover:border-slate-500`}">
@@ -160,8 +214,8 @@ function renderSetup() {
     }
     return `
         <div class="space-y-5">
-            <div class="text-center pt-2">
-                <div class="text-5xl mb-2">${subject.icon}</div>
+            <div class="text-center pt-2 bounce-in">
+                <div class="text-5xl mb-2 float-slow">${subject.icon}</div>
                 <h2 class="text-2xl font-extrabold text-white">${subject.title}</h2>
                 <p class="text-sm text-slate-400">${subject.subtitle}</p>
             </div>
@@ -169,7 +223,7 @@ function renderSetup() {
             ${sizeBlock}
 
             <button id="start-btn"
-                    class="w-full bg-gradient-to-br ${subject.themeAccent.replace('bg-', 'from-')} ${subject.themeAccent} to-${subject.themeAccent.replace('bg-', '')} p-5 rounded-2xl shadow-lg text-white font-extrabold text-lg active:scale-[0.98] transition-transform">
+                    class="glow-pulse tap-scale w-full bg-gradient-to-br ${subject.themeAccent.replace('bg-', 'from-')} ${subject.themeAccent} to-${subject.themeAccent.replace('bg-', '')} p-5 rounded-2xl shadow-lg text-white font-extrabold text-lg">
                 Start Test →
             </button>
         </div>
@@ -183,36 +237,39 @@ function renderPart1() {
     const tot = state.mcqs.length;
     return `
         <div class="space-y-5">
-            <div>
+            <div class="slide-in-right">
                 <div class="flex justify-between text-xs text-slate-400 mb-1">
                     <span>Part 1 — MCQs</span>
                     <span>${i + 1} / ${tot}</span>
                 </div>
                 <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                    <div class="h-full ${subject.themeAccent} transition-all" style="width:${((i + 1) / tot) * 100}%"></div>
+                    <div class="h-full ${subject.themeAccent} progress-bar-fill transition-all duration-500" style="width:${((i + 1) / tot) * 100}%"></div>
                 </div>
             </div>
 
-            <div class="bg-slate-800 rounded-2xl p-5 border border-slate-700 shadow-lg">
+            <div class="bg-slate-800 rounded-2xl p-5 border border-slate-700 shadow-lg slide-in-right" style="animation-delay: 0.05s">
                 <div class="text-xs uppercase tracking-wide ${subject.themeText} font-bold mb-2">Question ${i + 1}</div>
                 <p class="text-lg font-semibold text-white leading-snug">${escapeHtml(q.q)}</p>
             </div>
 
-            <div class="space-y-2">
+            <div class="space-y-2 slide-in-right" style="animation-delay: 0.1s">
                 ${q.options.map((opt, oi) => {
                     let cls = `bg-slate-800 border-slate-700 text-slate-300 hover:border-slate-500 hover:bg-slate-700/50`;
+                    let flash = '';
                     if (state.mcqSubmitted) {
                         if (oi === q.correct) {
                             cls = `bg-green-500 border-green-600 text-white shadow-md`;
+                            flash = ' correct-flash';
                         } else if (oi === state.mcqSelected) {
                             cls = `bg-red-500 border-red-600 text-white`;
+                            flash = ' wrong-flash';
                         } else {
                             cls = `bg-slate-800/40 border-slate-700 text-slate-500 opacity-60`;
                         }
                     } else if (oi === state.mcqSelected) {
                         cls = `${subject.themeBg} ${subject.themeText} border-current shadow-md`;
                     }
-                    return `<button data-option="${oi}" class="opt-btn w-full text-left p-4 rounded-xl border-2 font-medium text-sm transition-all ${cls}">
+                    return `<button data-option="${oi}" class="opt-btn tap-scale w-full text-left p-4 rounded-xl border-2 font-medium text-sm transition-all ${cls}${flash}">
                         <span class="inline-block w-6 h-6 rounded-full border-2 border-current text-xs font-bold mr-2 leading-6 text-center">${String.fromCharCode(65 + oi)}</span>
                         ${escapeHtml(opt)}
                     </button>`;
@@ -220,12 +277,12 @@ function renderPart1() {
             </div>
 
             ${state.mcqSubmitted ? `
-                <button id="next-btn" class="w-full ${subject.themeAccent} text-white font-bold p-4 rounded-2xl shadow-lg active:scale-[0.98] transition-transform">
+                <button id="next-btn" class="bounce-in w-full ${subject.themeAccent} text-white font-bold p-4 rounded-2xl shadow-lg tap-scale">
                     ${i + 1 === tot ? 'See Part 1 Score →' : 'Next Question →'}
                 </button>
             ` : `
                 <button id="submit-btn" ${state.mcqSelected === -1 ? 'disabled' : ''}
-                        class="w-full ${state.mcqSelected === -1 ? 'bg-slate-800 text-slate-500' : 'bg-gradient-to-br from-indigo-600 to-violet-700 text-white shadow-lg'} font-bold p-4 rounded-2xl active:scale-[0.98] transition-transform disabled:opacity-50">
+                        class="tap-scale w-full ${state.mcqSelected === -1 ? 'bg-slate-800 text-slate-500' : 'bg-gradient-to-br from-indigo-600 to-violet-700 text-white shadow-lg'} font-bold p-4 rounded-2xl disabled:opacity-50">
                     ${state.mcqSelected === -1 ? 'Pick an option first' : 'Submit Answer'}
                 </button>
             `}
@@ -240,13 +297,13 @@ function renderPart1Done() {
     const g   = grade(p);
     const hasShort = state.shortQs.length > 0;
     return `
-        <div class="space-y-5 pt-2 text-center">
-            <div class="text-6xl">${hasShort ? '🎉' : '🎯'}</div>
+        <div class="space-y-5 pt-2 text-center bounce-in">
+            <div class="text-6xl star-burst">${hasShort ? '🎉' : '🎯'}</div>
             <h2 class="text-2xl font-extrabold text-white">${hasShort ? 'Part 1 Complete!' : 'Test Complete!'}</h2>
 
             <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-lg">
                 <div class="text-sm text-slate-400 uppercase tracking-wide font-bold mb-2">Your MCQ Score</div>
-                <div class="text-6xl font-extrabold ${g.color}">${state.part1Correct}<span class="text-3xl text-slate-500"> / ${tot}</span></div>
+                <div class="text-6xl font-extrabold ${g.color}" data-counter="${state.part1Correct}">0<span class="text-3xl text-slate-500"> / ${tot}</span></div>
                 <div class="text-2xl font-bold text-slate-300 mt-1">${p}%</div>
                 <div class="mt-3 text-lg ${g.color}">${g.emoji} ${g.label}</div>
             </div>
@@ -256,12 +313,12 @@ function renderPart1Done() {
                     <p class="text-sm text-slate-300">Up next: <b class="text-white">${state.shortQs.length} short questions</b></p>
                 </div>
                 <button id="continue-btn"
-                        class="w-full ${subject.themeAccent} text-white font-bold p-4 rounded-2xl shadow-lg active:scale-[0.98] transition-transform">
+                        class="glow-pulse tap-scale w-full ${subject.themeAccent} text-white font-bold p-4 rounded-2xl shadow-lg">
                     Continue to Part 2 →
                 </button>
             ` : `
                 <button id="continue-btn"
-                        class="w-full ${subject.themeAccent} text-white font-bold p-4 rounded-2xl shadow-lg active:scale-[0.98] transition-transform">
+                        class="glow-pulse tap-scale w-full ${subject.themeAccent} text-white font-bold p-4 rounded-2xl shadow-lg">
                     View Result →
                 </button>
             `}
@@ -276,21 +333,21 @@ function renderPart2() {
     const tot = state.shortQs.length;
     return `
         <div class="space-y-5">
-            <div>
+            <div class="slide-in-right">
                 <div class="flex justify-between text-xs text-slate-400 mb-1">
                     <span>Part 2 — Short Questions</span>
                     <span>${i + 1} / ${tot}</span>
                 </div>
                 <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                    <div class="h-full ${subject.themeAccent} transition-all" style="width:${((i + 1) / tot) * 100}%"></div>
+                    <div class="h-full ${subject.themeAccent} progress-bar-fill transition-all duration-500" style="width:${((i + 1) / tot) * 100}%"></div>
                 </div>
             </div>
 
-            <div class="bg-slate-800 rounded-2xl p-5 border border-slate-700 shadow-lg">
+            <div class="bg-slate-800 rounded-2xl p-5 border border-slate-700 shadow-lg slide-in-right" style="animation-delay: 0.05s">
                 <div class="text-xs uppercase tracking-wide ${subject.themeText} font-bold mb-2">Question ${i + 1}</div>
                 <p class="text-lg font-semibold text-white leading-snug">${escapeHtml(q.q)}</p>
                 ${state.shortRevealed
-                    ? `<div class="mt-4 pt-4 border-t border-slate-700">
+                    ? `<div class="mt-4 pt-4 border-t border-slate-700 bounce-in">
                            <div class="text-xs uppercase tracking-wide text-emerald-400 font-bold mb-2">📖 Answer</div>
                            <p class="text-sm text-slate-200 leading-relaxed">${escapeHtml(q.a)}</p>
                        </div>`
@@ -299,23 +356,23 @@ function renderPart2() {
             </div>
 
             ${!state.shortRevealed ? `
-                <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-4 text-center text-sm text-slate-400">
+                <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-4 text-center text-sm text-slate-400 float-slow">
                     💭 Think about your answer first…
                 </div>
                 <button id="reveal-btn"
-                        class="w-full ${subject.themeAccent} text-white font-bold p-4 rounded-2xl shadow-lg active:scale-[0.98] transition-transform">
+                        class="tap-scale w-full ${subject.themeAccent} text-white font-bold p-4 rounded-2xl shadow-lg">
                     Reveal Answer 👀
                 </button>
             ` : state.shortSelfMarked === null ? `
-                <div class="bg-slate-800 rounded-2xl p-5 border border-slate-700 shadow-lg">
+                <div class="bg-slate-800 rounded-2xl p-5 border border-slate-700 shadow-lg bounce-in">
                     <h3 class="text-center font-bold text-slate-100 mb-3">Did you get it right?</h3>
                     <div class="grid grid-cols-2 gap-3">
                         <button data-mark="true"
-                                class="mark-btn bg-emerald-600 hover:bg-emerald-500 text-white font-bold p-4 rounded-xl shadow-md active:scale-[0.98] transition-transform">
+                                class="mark-btn tap-scale bg-emerald-600 hover:bg-emerald-500 text-white font-bold p-4 rounded-xl shadow-md">
                             ✅ Yes
                         </button>
                         <button data-mark="false"
-                                class="mark-btn bg-rose-600 hover:bg-rose-500 text-white font-bold p-4 rounded-xl shadow-md active:scale-[0.98] transition-transform">
+                                class="mark-btn tap-scale bg-rose-600 hover:bg-rose-500 text-white font-bold p-4 rounded-xl shadow-md">
                             ❌ No
                         </button>
                     </div>
@@ -336,45 +393,53 @@ function renderResult() {
     const hasShort = s > 0;
 
     return `
-        <div class="space-y-5 pt-2 text-center">
-            <div class="text-6xl">${g.emoji}</div>
+        <div class="space-y-5 pt-2 text-center bounce-in">
+            <div class="text-7xl star-burst">${g.emoji}</div>
             <h2 class="text-2xl font-extrabold text-white">Test Complete!</h2>
             <div class="text-lg ${g.color} font-bold">${g.label}</div>
 
             <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-lg">
                 <div class="text-sm text-slate-400 uppercase tracking-wide font-bold mb-2">Overall Score</div>
-                <div class="text-7xl font-extrabold ${g.color}">${p}%</div>
-                <div class="text-xl text-slate-300 mt-1">${correct} / ${tot} correct</div>
+                <div class="text-7xl font-extrabold ${g.color}" data-counter="${p}">0<span>%</span></div>
+                <div class="text-xl text-slate-300 mt-1">
+                    <span data-counter="${correct}">0</span> / <span data-counter="${tot}">0</span> correct
+                </div>
             </div>
 
             ${hasShort ? `
                 <div class="grid grid-cols-2 gap-3">
                     <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-4">
                         <div class="text-xs text-slate-400 uppercase font-bold">Part 1 (MCQs)</div>
-                        <div class="text-2xl font-extrabold text-white mt-1">${state.part1Correct}/${m}</div>
+                        <div class="text-2xl font-extrabold text-white mt-1">
+                            <span data-counter="${state.part1Correct}">0</span>/${m}
+                        </div>
                         <div class="text-sm ${grade(pct(state.part1Correct, m)).color}">${pct(state.part1Correct, m)}%</div>
                     </div>
                     <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-4">
                         <div class="text-xs text-slate-400 uppercase font-bold">Part 2 (Short)</div>
-                        <div class="text-2xl font-extrabold text-white mt-1">${state.part2Correct}/${s}</div>
+                        <div class="text-2xl font-extrabold text-white mt-1">
+                            <span data-counter="${state.part2Correct}">0</span>/${s}
+                        </div>
                         <div class="text-sm ${grade(pct(state.part2Correct, s)).color}">${pct(state.part2Correct, s)}%</div>
                     </div>
                 </div>
             ` : `
                 <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-4">
                     <div class="text-xs text-slate-400 uppercase font-bold">MCQs</div>
-                    <div class="text-2xl font-extrabold text-white mt-1">${state.part1Correct}/${m}</div>
+                    <div class="text-2xl font-extrabold text-white mt-1">
+                        <span data-counter="${state.part1Correct}">0</span>/${m}
+                    </div>
                     <div class="text-sm ${grade(pct(state.part1Correct, m)).color}">${pct(state.part1Correct, m)}%</div>
                 </div>
             `}
 
             <div class="grid grid-cols-2 gap-3 pt-3">
                 <button id="restart-btn"
-                        class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 font-bold p-4 rounded-2xl active:scale-[0.98] transition-transform">
+                        class="tap-scale bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 font-bold p-4 rounded-2xl">
                     🔁 Retry
                 </button>
                 <button id="done-btn"
-                        class="${subject.themeAccent} text-white font-bold p-4 rounded-2xl shadow-lg active:scale-[0.98] transition-transform">
+                        class="tap-scale ${subject.themeAccent} text-white font-bold p-4 rounded-2xl shadow-lg">
                     Done ✓
                 </button>
             </div>
@@ -382,7 +447,7 @@ function renderResult() {
     `;
 }
 
-// ─── escape utility (XSS-safe rendering of user content) ────────────────────
+// ─── escape utility ────────────────────────────────────────────────────────
 function escapeHtml(s) {
     return String(s)
         .replace(/&/g, '&amp;')
@@ -410,6 +475,8 @@ function bindEvents() {
         btn.onclick = () => {
             if (state.mcqSubmitted) return;
             state.mcqSelected = Number(btn.dataset.option);
+            btn.classList.add('option-pick');
+            setTimeout(() => btn.classList.remove('option-pick'), 300);
             render();
         };
     });
@@ -431,15 +498,6 @@ function bindEvents() {
                 state.mcqSubmitted = false;
             }
             render();
-        } else if (state.phase === 'part2') {
-            if (state.currentShortQ + 1 >= state.shortQs.length) {
-                state.phase = 'result';
-            } else {
-                state.currentShortQ++;
-                state.shortRevealed = false;
-                state.shortSelfMarked = null;
-            }
-            render();
         }
     };
 
@@ -458,8 +516,6 @@ function bindEvents() {
             state.shortSelfMarked = btn.dataset.mark === 'true';
             if (state.shortSelfMarked) state.part2Correct++;
             render();
-            // Auto-advance to next short Q (or to result if this was the last).
-            // 700ms gives the user a brief flash of green/red before moving on.
             setTimeout(() => {
                 if (state.currentShortQ + 1 >= state.shortQs.length) {
                     state.phase = 'result';

@@ -7,36 +7,189 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
-/* Smooth transitions */
+/* ═══════ PAGE-LEVEL FADES ═══════════════════════════════════════════════ */
 .fade-in {
-    animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.35s ease-out;
 }
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(8px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
+/* ═══════ SLIDE-IN CARDS ═════════════════════════════════════════════════ */
 .slide-in-right {
-    animation: slideInRight 0.3s forwards;
+    animation: slideInRight 0.4s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+    opacity: 0;
 }
 @keyframes slideInRight {
-    from { opacity: 0; transform: translateX(20px); }
-    to   { opacity: 1; transform: translateX(0); }
+    from { opacity: 0; transform: translateX(24px) scale(0.97); }
+    to   { opacity: 1; transform: translateX(0)    scale(1); }
 }
 
-/* Hide scrollbar but keep functionality */
-.no-scrollbar::-webkit-scrollbar {
-    display: none;
+/* ═══════ BOUNCE-IN (for results / popups) ═══════════════════════════════ */
+.bounce-in {
+    animation: bounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
+@keyframes bounceIn {
+    0%   { opacity: 0; transform: scale(0.4); }
+    60%  { opacity: 1; transform: scale(1.06); }
+    80%  { transform: scale(0.97); }
+    100% { transform: scale(1); }
+}
+
+/* ═══════ FLOATING DECORATIONS ═══════════════════════════════════════════ */
+.float-slow {
+    animation: float 4s ease-in-out infinite;
+}
+.float-slower {
+    animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+}
+
+/* ═══════ ANIMATED GRADIENT (for banners) ═══════════════════════════════ */
+.animated-gradient {
+    background-size: 200% 200%;
+    animation: gradientShift 9s ease infinite;
+}
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+}
+
+/* ═══════ GLOW PULSE ══════════════════════════════════════════════════════ */
+.glow-pulse {
+    animation: glowPulse 2.4s ease-in-out infinite;
+}
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.0),
+                    0 10px 25px -8px rgba(244, 63, 94, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(244, 63, 94, 0.0),
+                    0 10px 35px -6px rgba(244, 63, 94, 0.65);
+    }
+}
+
+/* ═══════ SHIMMER (skeleton-ish highlight) ═══════════════════════════════ */
+.shimmer {
+    background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.08) 50%,
+        rgba(255,255,255,0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2.5s linear infinite;
+}
+@keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* ═══════ CONFETTI ════════════════════════════════════════════════════════ */
+.confetti-piece {
+    position: fixed;
+    top: -20px;
+    width: 10px;
+    height: 14px;
+    border-radius: 2px;
+    z-index: 9999;
+    pointer-events: none;
+    animation: confettiFall 3.2s ease-out forwards;
+}
+@keyframes confettiFall {
+    0%   { transform: translateY(0)      rotate(0);   opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* ═══════ TAP SCALE (apply to any clickable) ═════════════════════════════ */
+.tap-scale {
+    transition: transform 0.12s ease-out;
+}
+.tap-scale:active {
+    transform: scale(0.96);
+}
+
+/* ═══════ CARD HOVER LIFT (for home & topic cards) ═════════════════════════ */
+.card-lift {
+    transition: transform 0.3s cubic-bezier(0.34, 1.2, 0.64, 1),
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+}
+.card-lift:hover {
+    transform: translateY(-3px);
+}
+
+/* ═══════ OPTION CHECK PULSE (when user picks an MCQ option) ══════════════ */
+.option-pick {
+    animation: optionPick 0.3s ease-out;
+}
+@keyframes optionPick {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.04); }
+    100% { transform: scale(1); }
+}
+
+/* ═══════ CORRECT FLASH ════════════════════════════════════════════════════ */
+.correct-flash {
+    animation: correctFlash 0.6s ease-out;
+}
+@keyframes correctFlash {
+    0%   { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    50%  { box-shadow: 0 0 0 14px rgba(16, 185, 129, 0.35); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+.wrong-flash {
+    animation: wrongFlash 0.6s ease-out;
+}
+@keyframes wrongFlash {
+    0%   { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+    50%  { box-shadow: 0 0 0 14px rgba(244, 63, 94, 0.35); }
+    100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+}
+
+/* ═══════ GENTLE PROGRESS BAR PULSE ═════════════════════════════════════ */
+@keyframes progressShimmer {
+    0%   { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+.progress-bar-fill {
+    background-size: 200% 100%;
+    animation: progressShimmer 2s linear infinite;
+}
+
+/* ═══════ HIDE SCROLLBAR ═════════════════════════════════════════════════ */
+.no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
-/* Glass effect header (dark) */
+/* ═══════ GLASS HEADER (dark) ════════════════════════════════════════════ */
 .glass-header {
     background: rgba(15, 23, 42, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ═══════ STAR BURST (for top scores) ════════════════════════════════════ */
+.star-burst {
+    animation: starBurst 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes starBurst {
+    0%   { transform: scale(0)   rotate(0deg); }
+    100% { transform: scale(1.2) rotate(360deg); }
+}
+
+/* ═══════ SUBTLE RADIAL GLOW BEHIND HERO ════════════════════════════════════ */
+.hero-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.08), transparent 60%);
 }

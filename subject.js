@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
             .join('');
 
         const cardHtml = `
-            <article class="bg-slate-800 rounded-2xl shadow-lg border border-slate-700 overflow-hidden slide-in-right" style="animation-delay: ${tIndex * 0.08}s">
+            <article class="card-lift slide-in-right bg-slate-800 rounded-2xl shadow-lg border border-slate-700 overflow-hidden"
+                     style="animation-delay: ${tIndex * 0.08}s">
                 <header class="${currentSubject.themeBg} ${currentSubject.themeText} p-4 border-b ${currentSubject.themeBorder} flex items-center gap-3">
                     <div class="text-3xl">${topic.emoji}</div>
                     <h3 class="text-xl font-bold leading-tight text-white">${topic.title}</h3>
@@ -53,22 +54,25 @@ document.addEventListener('DOMContentLoaded', () => {
         container.appendChild(div.firstElementChild);
     });
 
-    // Append "Test Me" button at the very end — only if this subject has a testPool
+    // Append "Test Me" button — only if this subject has a testPool.
+    // Glow-pulse animation draws the eye to it without being annoying.
     if (currentSubject.testPool) {
         const testBtn = document.createElement('div');
         testBtn.className = 'pt-2 pb-4 slide-in-right';
         testBtn.style.animationDelay = `${currentSubject.topics.length * 0.08}s`;
         testBtn.innerHTML = `
             <a href="test.html?subject=${subjectKey}"
-               class="flex items-center justify-between w-full bg-gradient-to-br ${currentSubject.themeAccent} ${currentSubject.themeText.replace('text-', 'text-')} p-5 rounded-2xl shadow-lg border border-slate-700 active:scale-[0.98] transition-transform group">
-                <div class="flex items-center gap-3">
-                    <div class="text-3xl">🎯</div>
-                    <div>
-                        <h3 class="text-xl font-extrabold text-white">Test Me</h3>
-                        <p class="text-sm text-white/80">MCQs + short questions — randomized</p>
+               class="glow-pulse tap-scale block bg-gradient-to-br ${currentSubject.themeAccent} ${currentSubject.themeText} p-5 rounded-2xl shadow-lg border border-slate-700 group">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="text-3xl">🎯</div>
+                        <div>
+                            <h3 class="text-xl font-extrabold text-white drop-shadow">Test Me</h3>
+                            <p class="text-sm text-white/85">MCQs ${currentSubject.testPool.shortQs && currentSubject.testPool.shortQs.length > 0 ? '+ short questions' : 'only'} — randomized</p>
+                        </div>
                     </div>
+                    <div class="text-white text-2xl font-bold group-hover:translate-x-1 transition-transform duration-300">→</div>
                 </div>
-                <div class="text-white text-2xl font-bold group-hover:translate-x-1 transition-transform">→</div>
             </a>
         `;
         container.appendChild(testBtn);
