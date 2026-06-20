@@ -1,7 +1,7 @@
 export const appData = {
     math: {
-        title: "Types of Numbers",
-        subtitle: "Natural, Whole, Integers, Rational & more",
+        title: "Mathematics",
+        subtitle: "Types of Numbers — Natural, Whole, Integers, Rational & more",
         icon: "🔢",
         themeText: "text-rose-400",
         themeBg: "bg-rose-500/15",
