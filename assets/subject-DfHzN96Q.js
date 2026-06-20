@@ -1,0 +1,58 @@
+import{a as h}from"./data-BAnYRzoD.js";document.addEventListener("DOMContentLoaded",()=>{const n=document.body.getAttribute("data-subject"),t=h[n];if(!t)return;document.getElementById("subject-title").innerHTML=`${t.icon} ${t.title}`;const a=document.getElementById("topics-container");a.innerHTML="",t.topics.forEach((e,l)=>{const r=e.facts.map(s=>`<li class="flex gap-2"><span class="${t.themeText}">•</span> <span>${s}</span></li>`).join(""),o=e.qa.map(s=>`
+            <div class="qa-card bg-white border border-slate-100 rounded-lg overflow-hidden mb-2 shadow-sm">
+                <button class="qa-toggle-btn w-full text-left p-3 font-semibold text-slate-700 flex justify-between items-center hover:bg-slate-50">
+                    <span class="flex-1 pr-4">Q: ${s.q}</span>
+                    <svg class="qa-icon w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="answer-content bg-slate-50 px-3 pb-3 text-slate-600 text-sm">
+                    <span class="font-bold text-slate-700">A:</span> ${s.a}
+                </div>
+            </div>
+        `).join(""),i=e.mcqs.map((s,m)=>{const b=s.options.map((p,x)=>`
+                <button data-correct="${x===s.correct}" class="mcq-btn w-full text-left p-3 border border-slate-200 rounded-lg mb-2 text-sm font-medium text-slate-600 hover:bg-slate-50 transition-colors">
+                    ${p}
+                </button>
+            `).join("");return`
+                <div class="mb-5 last:mb-0">
+                    <p class="font-bold text-slate-700 text-sm mb-3">${m+1}. ${s.q}</p>
+                    <div class="mcq-container">${b}</div>
+                </div>
+            `}).join(""),c=`
+            <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden slide-in-right" style="animation-delay: ${l*.1}s">
+                <div class="${t.themeBg} ${t.themeText} p-4 border-b ${t.themeBorder} flex items-center gap-3">
+                    <div class="text-3xl">${e.emoji}</div>
+                    <h3 class="text-xl font-bold leading-tight">${e.title}</h3>
+                </div>
+                <div class="p-4 space-y-5">
+                    <div>
+                        <div class="inline-block px-2 py-1 ${t.themeBg} ${t.themeText} text-xs font-bold rounded mb-2 uppercase tracking-wide">Definition</div>
+                        <p class="text-slate-700 text-sm mb-3">${e.definition}</p>
+                        <ul class="text-sm text-slate-600 space-y-1">
+                            ${r}
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 relative">
+                        <div class="absolute -top-3 left-4 bg-amber-100 text-amber-700 text-xs font-bold px-2 py-1 rounded-full border border-amber-200 shadow-sm flex items-center gap-1">
+                            👶 Explain Like I'm 5
+                        </div>
+                        <p class="text-sm text-slate-600 mt-2 italic">"${e.eli5}"</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 mb-3 flex items-center gap-2">
+                            <svg class="w-5 h-5 ${t.themeText}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                            Questions & Answers
+                        </h4>
+                        ${o}
+                    </div>
+                    <div class="pt-4 border-t border-slate-100">
+                        <h4 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5 ${t.themeText}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Test Yourself (MCQs)
+                        </h4>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            ${i}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `,d=document.createElement("div");d.innerHTML=c,a.appendChild(d.firstElementChild)}),a.querySelectorAll(".qa-toggle-btn").forEach(e=>{e.addEventListener("click",()=>{e.closest(".qa-card").classList.toggle("open")})}),a.querySelectorAll(".mcq-btn").forEach(e=>{e.addEventListener("click",()=>{const l=e.closest(".mcq-container");if(l.classList.contains("answered"))return;l.classList.add("answered"),e.getAttribute("data-correct")==="true"?(e.classList.remove("bg-white","text-slate-600","border-slate-200"),e.classList.add("bg-green-500","text-white","border-green-600","shadow-md")):(e.classList.remove("bg-white","text-slate-600","border-slate-200"),e.classList.add("bg-red-500","text-white","border-red-600")),l.querySelectorAll(".mcq-btn").forEach(o=>{o!==e&&o.classList.add("opacity-50","cursor-not-allowed")})})})});
