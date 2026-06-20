@@ -1,0 +1,31 @@
+import fs from 'fs';
+
+const subjects = ['math', 'english', 'gk', 'biology', 'chemistry', 'physics'];
+
+subjects.forEach(sub => {
+    const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>${sub.toUpperCase()} - Grade 8 Prep</title>
+</head>
+<body class="text-slate-800 antialiased h-screen flex flex-col overflow-hidden bg-slate-50" data-subject="${sub}">
+    <div id="subject-page" class="h-full flex flex-col w-full max-w-md mx-auto relative bg-slate-50 shadow-xl z-20">
+        <header id="subject-header" class="glass-header sticky top-0 z-30 px-4 py-4 flex items-center justify-between">
+            <a href="index.html" class="p-2 bg-white rounded-full shadow-sm text-slate-600 hover:text-slate-900 active:scale-95 transition-transform border border-slate-100">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+            </a>
+            <h2 id="subject-title" class="text-xl font-extrabold flex items-center gap-2">Loading...</h2>
+            <div class="w-10"></div>
+        </header>
+        <div id="topics-container" class="flex-1 overflow-y-auto no-scrollbar p-4 space-y-6 pb-20">
+        </div>
+    </div>
+    <script type="module" src="/subject.js"></script>
+</body>
+</html>`;
+    fs.writeFileSync(`${sub}.html`, html);
+});

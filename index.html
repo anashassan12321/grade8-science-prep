@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Grade 8 Admission Prep</title>
 </head>
-<body class="text-slate-800 antialiased h-screen flex flex-col overflow-hidden">
+<body class="text-slate-800 antialiased h-screen flex flex-col overflow-hidden bg-slate-50">
 
-    <!-- HOME PAGE -->
     <div id="home-page" class="h-full flex flex-col overflow-y-auto no-scrollbar fade-in w-full max-w-md mx-auto relative bg-slate-50 shadow-xl">
         <div class="px-6 pt-12 pb-8 bg-gradient-to-br from-indigo-600 to-violet-700 text-white rounded-b-[2.5rem] shadow-lg relative overflow-hidden">
             <div class="absolute top-[-20px] right-[-20px] w-32 h-32 bg-white opacity-10 rounded-full"></div>
@@ -23,29 +22,9 @@
                 Select a Subject
             </h2>
             
-            <!-- Dynamic Subject List -->
             <div id="subjects-list" class="space-y-4">
                 <!-- Injected via JS -->
             </div>
-        </div>
-    </div>
-
-    <!-- SUBJECT PAGE -->
-    <div id="subject-page" class="hidden h-full flex flex-col w-full max-w-md mx-auto relative bg-slate-50 shadow-xl z-20">
-        <!-- Header -->
-        <header id="subject-header" class="glass-header sticky top-0 z-30 px-4 py-4 flex items-center justify-between">
-            <button id="btn-home" class="p-2 bg-white rounded-full shadow-sm text-slate-600 hover:text-slate-900 active:scale-95 transition-transform border border-slate-100">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                </svg>
-            </button>
-            <h2 id="subject-title" class="text-xl font-extrabold flex items-center gap-2">Subject Title</h2>
-            <div class="w-10"></div> <!-- Spacer for centering -->
-        </header>
-
-        <!-- Content Area -->
-        <div id="topics-container" class="flex-1 overflow-y-auto no-scrollbar p-4 space-y-6 pb-20">
-            <!-- Topics get injected here by JS -->
         </div>
     </div>
 
