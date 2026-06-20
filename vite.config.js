@@ -1,8 +1,11 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
 
+// Use relative base so the build works on BOTH Cloudflare Pages (project root)
+// AND GitHub Pages (project sub-path). Asset paths are emitted as
+// "./assets/..." which the browser resolves relative to the HTML file's URL.
 export default defineConfig({
-  base: '/grade8-science-prep/',
+  base: './',
   build: {
     rollupOptions: {
       input: {
