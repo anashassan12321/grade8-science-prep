@@ -33,15 +33,18 @@ body {
     scrollbar-width: none;
 }
 
-/* Q&A Accordion transition */
+/* Q&A Accordion transition — CSS grid trick so long answers are never clipped */
 .answer-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out, padding 0.3s ease;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
 }
 .qa-card.open .answer-content {
-    max-height: 200px;
-    padding-top: 0.75rem;
+    grid-template-rows: 1fr;
+}
+.answer-inner {
+    overflow: hidden;
+    min-height: 0;
 }
 .qa-icon {
     transition: transform 0.3s ease;

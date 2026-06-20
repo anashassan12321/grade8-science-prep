@@ -21,8 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="flex-1 pr-4">Q: ${qa.q}</span>
                     <svg class="qa-icon w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
-                <div class="answer-content bg-slate-50 px-3 pb-3 text-slate-600 text-sm">
-                    <span class="font-bold text-slate-700">A:</span> ${qa.a}
+                <div class="answer-content">
+                    <div class="answer-inner bg-slate-50 px-3 pb-3 text-slate-600 text-sm">
+                        <span class="font-bold text-slate-700">A:</span> ${qa.a}
+                    </div>
                 </div>
             </div>
         `).join('');
