@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Test - Grade 8 Prep</title>
+</head>
+<body class="text-slate-100 antialiased h-screen flex flex-col overflow-hidden bg-slate-950">
+    <div id="test-page" class="h-full flex flex-col w-full max-w-md mx-auto relative bg-slate-900 shadow-2xl">
+        <header class="glass-header sticky top-0 z-30 px-4 py-4 flex items-center justify-between">
+            <button id="back-btn" class="p-2 bg-slate-800 rounded-full shadow-sm text-slate-300 hover:text-white active:scale-95 transition-transform border border-slate-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <h2 id="test-title" class="text-xl font-extrabold flex items-center gap-2">Loading…</h2>
+            <div class="w-10"></div>
+        </header>
+        <main id="test-content" class="flex-1 overflow-y-auto no-scrollbar p-5 pb-20">
+            <!-- injected by test.js -->
+        </main>
+    </div>
+    <script type="module" src="/test.js"></script>
+</body>
+</html>

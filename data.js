@@ -93,7 +93,86 @@ export const appData = {
                 ],
                 eli5: "Prime numbers are loners — they only play with themselves and the number 1. Try splitting 7 into equal groups… you just can't, except one big group of 7, or seven 1s! Composite numbers like 6 are friendlier — 6 = 2 × 3, so 6 cookies split perfectly into 2 groups of 3."
             }
-        ]
+        ],
+        testPool: {
+            mcqs: [
+                // Natural & Whole (7)
+                { q: "Which of these is a natural number?", options: ["-1", "0", "5", "0.5"], correct: 2, topic: "Natural & Whole" },
+                { q: "What is the smallest whole number?", options: ["0", "1", "-1", "2"], correct: 0, topic: "Natural & Whole" },
+                { q: "Where does the number 0 belong?", options: ["Natural numbers only", "Whole numbers only", "Both natural and whole", "Neither"], correct: 1, topic: "Natural & Whole" },
+                { q: "Which of these is a whole number?", options: ["-3", "0", "0.5", "½"], correct: 1, topic: "Natural & Whole" },
+                { q: "The number 7 is…", options: ["Natural and whole", "Only natural", "Only whole", "Neither"], correct: 0, topic: "Natural & Whole" },
+                { q: "Are natural numbers a subset of whole numbers?", options: ["Yes", "No", "Only sometimes", "Only if even"], correct: 0, topic: "Natural & Whole" },
+                { q: "W = {0, 1, 2, 3, …} represents…", options: ["Natural numbers", "Whole numbers", "Integers", "Rationals"], correct: 1, topic: "Natural & Whole" },
+
+                // Integers (7)
+                { q: "Which of these is an integer?", options: ["½", "0.7", "-5", "π"], correct: 2, topic: "Integers" },
+                { q: "The symbol ℤ stands for…", options: ["Natural numbers", "Whole numbers", "Integers", "Rationals"], correct: 2, topic: "Integers" },
+                { q: "Which is a negative integer?", options: ["0", "1", "-10", "0.5"], correct: 2, topic: "Integers" },
+                { q: "Zero is…", options: ["Positive", "Negative", "Neither positive nor negative", "Not an integer"], correct: 2, topic: "Integers" },
+                { q: "Which is NOT an integer?", options: ["-3", "7", "½", "0"], correct: 2, topic: "Integers" },
+                { q: "Integers include…", options: ["Only positives", "Whole numbers, zero, and their negatives", "All numbers", "Fractions only"], correct: 1, topic: "Integers" },
+                { q: "What comes right before -1 on the number line?", options: ["-2", "0", "1", "-0.5"], correct: 0, topic: "Integers" },
+
+                // Rational (7)
+                { q: "Which is a rational number?", options: ["π", "√2", "¾", "e"], correct: 2, topic: "Rational" },
+                { q: "A rational number can be written as…", options: ["A decimal only", "A fraction p⁄q where q ≠ 0", "A square root", "An infinite decimal"], correct: 1, topic: "Rational" },
+                { q: "Is 0.5 rational?", options: ["Yes", "No", "Only sometimes", "Only if it's a fraction"], correct: 0, topic: "Rational" },
+                { q: "The number -2.5 is…", options: ["An integer", "Irrational", "Rational", "A whole number"], correct: 2, topic: "Rational" },
+                { q: "Which is NOT a rational number?", options: ["½", "0.333…", "7", "√3"], correct: 3, topic: "Rational" },
+                { q: "The symbol ℚ stands for…", options: ["Integers", "Rational numbers", "Real numbers", "Quads"], correct: 1, topic: "Rational" },
+                { q: "Every integer is also…", options: ["Irrational", "Rational", "A whole number", "Not rational"], correct: 1, topic: "Rational" },
+
+                // Irrational (7)
+                { q: "Which is an irrational number?", options: ["½", "0.333…", "π", "7"], correct: 2, topic: "Irrational" },
+                { q: "The decimals of an irrational number…", options: ["Always end", "Always repeat", "Never end and never repeat", "Sometimes repeat"], correct: 2, topic: "Irrational" },
+                { q: "Which is irrational?", options: ["√4", "√9", "√2", "0.5"], correct: 2, topic: "Irrational" },
+                { q: "π is approximately…", options: ["3.14", "2.71", "1.41", "1.61"], correct: 0, topic: "Irrational" },
+                { q: "Which famous irrational starts with 1.41421…?", options: ["π", "e", "√2", "φ"], correct: 2, topic: "Irrational" },
+                { q: "Who first discovered irrational numbers?", options: ["Egyptians", "Ancient Greeks", "Romans", "Modern scientists"], correct: 1, topic: "Irrational" },
+                { q: "Between any two rational numbers there is always…", options: ["Another rational", "An integer", "An irrational number", "Zero"], correct: 2, topic: "Irrational" },
+
+                // Real (7)
+                { q: "The symbol ℝ stands for…", options: ["Rational numbers", "Real numbers", "Integers", "Whole numbers"], correct: 1, topic: "Real" },
+                { q: "Real numbers include…", options: ["Only rationals", "Only irrationals", "Rational + irrational", "Only integers"], correct: 2, topic: "Real" },
+                { q: "Which is NOT a real number?", options: ["-5", "0", "π", "√(-1)"], correct: 3, topic: "Real" },
+                { q: "A real number is one that has…", options: ["A name", "A place on the number line", "A decimal form", "A symbol"], correct: 1, topic: "Real" },
+                { q: "Which of these is a real number?", options: ["√(-4)", "∞", "0.5", "All of the above"], correct: 2, topic: "Real" },
+                { q: "Real numbers are the combination of…", options: ["Whole + integers", "Rational + irrational", "Natural + whole", "All fractions"], correct: 1, topic: "Real" },
+                { q: "Is infinity (∞) a real number?", options: ["Yes", "No", "Sometimes", "Only positive"], correct: 1, topic: "Real" },
+
+                // Even & Odd (7)
+                { q: "Which is an even number?", options: ["3", "7", "12", "21"], correct: 2, topic: "Even/Odd" },
+                { q: "Is 0 even or odd?", options: ["Odd", "Even", "Neither", "Positive"], correct: 1, topic: "Even/Odd" },
+                { q: "Which ends in an odd digit?", options: ["42", "56", "89", "100"], correct: 2, topic: "Even/Odd" },
+                { q: "An odd number always leaves what remainder when divided by 2?", options: ["0", "1", "2", "3"], correct: 1, topic: "Even/Odd" },
+                { q: "Which is odd?", options: ["14", "28", "35", "100"], correct: 2, topic: "Even/Odd" },
+                { q: "Even numbers end in…", options: ["1 or 3", "0, 2, 4, 6, or 8", "5 or 7", "9 only"], correct: 1, topic: "Even/Odd" },
+                { q: "The number 999 is…", options: ["Even", "Odd", "Zero", "Not a number"], correct: 1, topic: "Even/Odd" },
+
+                // Prime & Composite (8)
+                { q: "Which is a prime number?", options: ["4", "9", "11", "15"], correct: 2, topic: "Prime/Composite" },
+                { q: "The number 1 is…", options: ["Prime", "Composite", "Neither", "A factor"], correct: 2, topic: "Prime/Composite" },
+                { q: "Which is composite?", options: ["2", "5", "9", "7"], correct: 2, topic: "Prime/Composite" },
+                { q: "What is the only EVEN prime?", options: ["0", "2", "4", "6"], correct: 1, topic: "Prime/Composite" },
+                { q: "The smallest composite number is…", options: ["1", "2", "3", "4"], correct: 3, topic: "Prime/Composite" },
+                { q: "A prime has how many factors?", options: ["1", "2", "3", "4"], correct: 1, topic: "Prime/Composite" },
+                { q: "Which is prime?", options: ["15", "21", "23", "25"], correct: 2, topic: "Prime/Composite" },
+                { q: "The prime factorisation of 12 is…", options: ["2 × 6", "3 × 4", "2² × 3", "2 × 2 × 2"], correct: 2, topic: "Prime/Composite" }
+            ],
+            shortQs: [
+                { q: "Define a natural number and give three examples.", a: "Natural numbers are counting numbers starting from 1. Examples: 1, 2, 3 (and so on). They are written with the symbol ℕ.", topic: "Natural & Whole" },
+                { q: "How are whole numbers different from natural numbers?", a: "Whole numbers include 0 along with all natural numbers. So W = {0, 1, 2, 3, …} while ℕ = {1, 2, 3, …}. Zero is the only difference.", topic: "Natural & Whole" },
+                { q: "What is an integer? Give two positive and two negative examples.", a: "An integer is any whole number, zero, or the negative of a whole number. Positive examples: 5, 12. Negative examples: -7, -100.", topic: "Integers" },
+                { q: "Where does 0 fit in the integers — positive, negative, or neither?", a: "Zero is NEITHER positive nor negative. It sits exactly between the positive and negative integers on the number line.", topic: "Integers" },
+                { q: "Write 0.75 as a fraction. Is 0.333… rational? Why?", a: "0.75 = ¾ (a fraction, so it is rational). 0.333… is rational because it equals ⅓ — repeating decimals can always be written as a fraction.", topic: "Rational" },
+                { q: "What makes a number irrational? Give two examples.", a: "An irrational number cannot be written as a simple fraction, and its decimals go on forever without repeating. Examples: π (3.14159…) and √2 (1.41421…).", topic: "Irrational" },
+                { q: "What is a real number? Is π a real number?", a: "A real number is any number that has a place on the number line (every rational + every irrational). Yes, π is a real number.", topic: "Real" },
+                { q: "Is 0 even or odd? Explain how you know.", a: "0 is EVEN. When you divide 0 by 2 you get exactly 0 with nothing left over, which is the rule for even numbers.", topic: "Even/Odd" },
+                { q: "Define prime and composite. Is 1 prime or composite?", a: "A prime has exactly two factors: 1 and itself. A composite has more than two factors. The number 1 is NEITHER — it has only one factor.", topic: "Prime/Composite" },
+                { q: "Find the prime factorisation of 60.", a: "60 = 2 × 2 × 3 × 5  (or 2² × 3 × 5). Every factor is prime.", topic: "Prime/Composite" }
+            ]
+        }
     },
     biology: {
         title: "Biology",
@@ -141,7 +220,53 @@ export const appData = {
                 ],
                 eli5: "The heart is a pump pushing a massive river of blood around your body. The 'red boats' (red blood cells) carry oxygen, and the 'white boats' (white blood cells) are brave police officers that fight off germs!"
             }
-        ]
+        ],
+        testPool: {
+            mcqs: [
+                // Transportation in Plants (8)
+                { q: "Which tissue carries water from roots to leaves?", options: ["Phloem", "Xylem", "Stomata", "Chlorophyll"], correct: 1, topic: "Plants" },
+                { q: "What is transpiration?", options: ["Food making", "Loss of water from leaves", "Growth of roots", "Flower opening"], correct: 1, topic: "Plants" },
+                { q: "Phloem carries…", options: ["Water", "Food/sugar", "Air", "Minerals only"], correct: 1, topic: "Plants" },
+                { q: "Stomata are…", options: ["Roots", "Tiny pores on leaves", "Stem parts", "Flowers"], correct: 1, topic: "Plants" },
+                { q: "Which gas do plants TAKE IN through stomata?", options: ["Oxygen", "Nitrogen", "CO₂", "Hydrogen"], correct: 2, topic: "Plants" },
+                { q: "Xylem and phloem are found in…", options: ["Roots only", "Leaves only", "Stems and other parts", "Flowers only"], correct: 2, topic: "Plants" },
+                { q: "What pulls water up through the xylem?", options: ["Gravity", "Transpiration", "Wind", "Animals"], correct: 1, topic: "Plants" },
+                { q: "Which gas do plants RELEASE through stomata?", options: ["CO₂", "Nitrogen", "O₂", "Helium"], correct: 2, topic: "Plants" },
+
+                // Digestive (8)
+                { q: "Where does digestion START?", options: ["Stomach", "Mouth", "Small intestine", "Large intestine"], correct: 1, topic: "Digestive" },
+                { q: "The esophagus is…", options: ["A stomach part", "The food pipe", "A type of food", "An organ in the brain"], correct: 1, topic: "Digestive" },
+                { q: "Where does most nutrient absorption happen?", options: ["Stomach", "Mouth", "Small intestine", "Large intestine"], correct: 2, topic: "Digestive" },
+                { q: "What does the large intestine mainly absorb?", options: ["Food", "Water", "Oxygen", "Sugar"], correct: 1, topic: "Digestive" },
+                { q: "Digestion breaks food into…", options: ["Bigger pieces", "Simpler substances", "Same size", "Waste only"], correct: 1, topic: "Digestive" },
+                { q: "Which organ turns food into faeces?", options: ["Stomach", "Small intestine", "Large intestine", "Mouth"], correct: 2, topic: "Digestive" },
+                { q: "Saliva is produced in the…", options: ["Stomach", "Mouth", "Intestine", "Liver"], correct: 1, topic: "Digestive" },
+                { q: "The small intestine is where…", options: ["Food enters", "Most absorption happens", "Waste forms", "Chewing happens"], correct: 1, topic: "Digestive" },
+
+                // Blood (9)
+                { q: "The heart is a…", options: ["Bone", "Muscle", "Liquid", "Skin"], correct: 1, topic: "Blood" },
+                { q: "Arteries carry blood…", options: ["Toward the heart", "Away from the heart", "Only downward", "Only at night"], correct: 1, topic: "Blood" },
+                { q: "Veins carry blood…", options: ["Away from the heart", "Toward the heart", "Around the lungs only", "Up only"], correct: 1, topic: "Blood" },
+                { q: "What pumps blood around the body?", options: ["Brain", "Lungs", "Heart", "Liver"], correct: 2, topic: "Blood" },
+                { q: "Red blood cells carry…", options: ["Water", "Oxygen", "Food", "Waste"], correct: 1, topic: "Blood" },
+                { q: "White blood cells…", options: ["Carry oxygen", "Fight germs", "Pump blood", "Digest food"], correct: 1, topic: "Blood" },
+                { q: "Capillaries are…", options: ["Big tubes", "Tiny tubes (need a microscope)", "Bones", "Cells"], correct: 1, topic: "Blood" },
+                { q: "Which vessel usually carries oxygen-RICH blood?", options: ["Veins", "Arteries", "Capillaries", "None"], correct: 1, topic: "Blood" },
+                { q: "The main job of blood is to…", options: ["Make you strong", "Carry oxygen, nutrients and wastes", "Make noise", "Make bones"], correct: 1, topic: "Blood" }
+            ],
+            shortQs: [
+                { q: "What is the job of xylem in a plant?", a: "Xylem is a tube inside the plant that carries water and minerals from the roots UP to the leaves.", topic: "Plants" },
+                { q: "What is transpiration?", a: "Transpiration is when leaves lose water vapour. This loss pulls more water up through the xylem from the roots, like sucking on a straw.", topic: "Plants" },
+                { q: "What are stomata and what do they do?", a: "Stomata are tiny holes on the underside of leaves. They let gases in and out — CO₂ in for photosynthesis, O₂ out as a waste product.", topic: "Plants" },
+                { q: "List the organs food passes through, in order.", a: "Mouth → Esophagus → Stomach → Small Intestine → Large Intestine → Rectum → Anus.", topic: "Digestive" },
+                { q: "Where does digestion start, and where does most absorption happen?", a: "Digestion starts in the mouth (teeth + saliva). Most nutrient absorption happens in the small intestine.", topic: "Digestive" },
+                { q: "What is the role of the large intestine?", a: "The large intestine soaks up the last bit of water from undigested food and turns what is left into solid waste (faeces).", topic: "Digestive" },
+                { q: "What does the heart do?", a: "The heart is a strong muscle that pumps blood around the body through the blood vessels, like a water pump pushing water through pipes.", topic: "Blood" },
+                { q: "What is the difference between arteries and veins?", a: "Arteries carry blood AWAY from the heart (usually full of oxygen). Veins carry blood BACK to the heart (usually low in oxygen).", topic: "Blood" },
+                { q: "What do red blood cells do?", a: "Red blood cells carry oxygen from the lungs to every part of the body. They give blood its red colour.", topic: "Blood" },
+                { q: "What do white blood cells do?", a: "White blood cells fight germs and infections. They are part of the body's immune (defence) system.", topic: "Blood" }
+            ]
+        }
     },
     chemistry: {
         title: "Chemistry",
@@ -189,7 +314,53 @@ export const appData = {
                 ],
                 eli5: "Acids usually taste sour, like lemon juice or vinegar. Bases feel slippery, like soap. They are chemical opposites! Special litmus paper turns red in acids and blue in bases."
             }
-        ]
+        ],
+        testPool: {
+            mcqs: [
+                // Atoms (8)
+                { q: "The smallest piece of an element is called…", options: ["A molecule", "An atom", "A compound", "A cell"], correct: 1, topic: "Atoms" },
+                { q: "A molecule is…", options: ["One atom", "Two or more atoms joined together", "A type of cell", "A solid"], correct: 1, topic: "Atoms" },
+                { q: "Water (H₂O) is an example of…", options: ["An element", "A molecule", "An atom", "A proton"], correct: 1, topic: "Atoms" },
+                { q: "An element is made of…", options: ["Many different atoms", "Only one kind of atom", "No atoms", "Always gases"], correct: 1, topic: "Atoms" },
+                { q: "Two or more DIFFERENT elements joined make a…", options: ["Molecule", "Compound", "Atom", "Mixture"], correct: 1, topic: "Atoms" },
+                { q: "The chemical formula for water is…", options: ["HO", "H₂O", "H₂O₂", "O₂"], correct: 1, topic: "Atoms" },
+                { q: "How many atoms are in one molecule of CO₂?", options: ["1", "2", "3", "4"], correct: 2, topic: "Atoms" },
+                { q: "Which is an element?", options: ["Water", "Salt", "Gold (Au)", "Sugar"], correct: 2, topic: "Atoms" },
+
+                // Metals (8)
+                { q: "Which is a property of metals?", options: ["Dull", "Shiny", "Poor conductor", "Brittle"], correct: 1, topic: "Metals" },
+                { q: "Which is a non-metal?", options: ["Iron", "Copper", "Oxygen", "Gold"], correct: 2, topic: "Metals" },
+                { q: "Malleable means…", options: ["Can break easily", "Can be hammered into sheets", "Conducts electricity", "Is shiny"], correct: 1, topic: "Metals" },
+                { q: "Ductile means…", options: ["Hard", "Can be drawn into wires", "Dull", "Liquid"], correct: 1, topic: "Metals" },
+                { q: "A good conductor of electricity is usually a…", options: ["Non-metal", "Metal", "Gas", "Wood"], correct: 1, topic: "Metals" },
+                { q: "Non-metals are usually…", options: ["Shiny", "Ductile", "Dull", "Malleable"], correct: 2, topic: "Metals" },
+                { q: "Which is a metal?", options: ["Sulfur", "Oxygen", "Aluminum", "Carbon"], correct: 2, topic: "Metals" },
+                { q: "Plastic is a good…", options: ["Conductor", "Insulator", "Magnet", "Battery"], correct: 1, topic: "Metals" },
+
+                // Acids (9)
+                { q: "An acid usually tastes…", options: ["Sweet", "Bitter", "Sour", "Salty"], correct: 2, topic: "Acids" },
+                { q: "A base usually feels…", options: ["Slimy/soapy", "Dry", "Hot", "Cold"], correct: 0, topic: "Acids" },
+                { q: "The pH of a neutral substance is…", options: ["0", "7", "14", "1"], correct: 1, topic: "Acids" },
+                { q: "Acid turns blue litmus paper…", options: ["Blue", "Red", "Green", "Yellow"], correct: 1, topic: "Acids" },
+                { q: "Base turns red litmus paper…", options: ["Red", "Blue", "Green", "Yellow"], correct: 1, topic: "Acids" },
+                { q: "When you mix an acid and a base, you get…", options: ["More acid", "Salt + water", "Only water", "A gas"], correct: 1, topic: "Acids" },
+                { q: "Which is an acid?", options: ["Soap", "Baking soda", "Lemon juice", "Milk of magnesia"], correct: 2, topic: "Acids" },
+                { q: "pH less than 7 means the substance is…", options: ["Basic", "Neutral", "Acidic", "Salty"], correct: 2, topic: "Acids" },
+                { q: "Hydroxide ions (OH⁻) are found in…", options: ["Acids", "Bases", "Pure water", "Salt only"], correct: 1, topic: "Acids" }
+            ],
+            shortQs: [
+                { q: "What is an atom?", a: "An atom is the tiniest piece of an element that still behaves like that element. Everything in the world is made of atoms.", topic: "Atoms" },
+                { q: "What is a molecule? Give two examples.", a: "A molecule is two or more atoms stuck together. Examples: O₂ (oxygen gas), H₂O (water), CO₂ (carbon dioxide).", topic: "Atoms" },
+                { q: "What is the difference between an element and a compound?", a: "An element is made of only one kind of atom (e.g. pure gold). A compound is made of two or more DIFFERENT kinds of atoms joined together (e.g. water = hydrogen + oxygen).", topic: "Atoms" },
+                { q: "Name three properties of metals.", a: "Shiny, malleable (hammered into sheets), ductile (drawn into wires), good conductors of heat and electricity.", topic: "Metals" },
+                { q: "Name three examples of metals.", a: "Iron (Fe), Copper (Cu), Aluminium (Al), Gold (Au), Silver (Ag) — any three from this list.", topic: "Metals" },
+                { q: "What is the difference between a conductor and an insulator?", a: "A conductor lets electricity pass through it easily (e.g. copper). An insulator blocks electricity (e.g. plastic, rubber, wood).", topic: "Metals" },
+                { q: "What does litmus paper do?", a: "Litmus paper is a special coloured paper that tells you if a substance is an acid or a base. Acid turns blue litmus RED; base turns red litmus BLUE.", topic: "Acids" },
+                { q: "What is an acid? Give one example.", a: "An acid is a substance that makes hydrogen ions (H⁺) in water. It usually tastes sour. Examples: lemon juice, vinegar, HCl.", topic: "Acids" },
+                { q: "What is a base? Give one example.", a: "A base is a substance that makes hydroxide ions (OH⁻) in water. It usually feels soapy/slippery. Examples: soap, baking soda, milk of magnesia.", topic: "Acids" },
+                { q: "What happens during neutralisation?", a: "When you mix an acid and a base together, they cancel each other out. The products are a SALT and WATER, and the mixture is no longer acidic or basic (it becomes neutral, pH 7).", topic: "Acids" }
+            ]
+        }
     },
     physics: {
         title: "Physics",
@@ -260,6 +431,56 @@ export const appData = {
                 ],
                 eli5: "Heat is special energy that hates being unbalanced. It always jumps from a hot thing (soup) into a cold thing (spoon or air) until everything is exactly the same temperature. That's why ice melts in your hand!"
             }
-        ]
+        ],
+        testPool: {
+            mcqs: [
+                // Force (5)
+                { q: "Force is a…", options: ["Push or pull", "Type of energy", "Flow of electrons", "Property of light"], correct: 0, topic: "Force" },
+                { q: "The unit of force is the…", options: ["Joule", "Newton", "Watt", "Meter"], correct: 1, topic: "Force" },
+                { q: "Force can change an object's…", options: ["Colour only", "Speed, direction, or shape", "Mass only", "Temperature only"], correct: 1, topic: "Force" },
+                { q: "Friction is a type of…", options: ["Non-contact force", "Contact force", "Magnetic force", "None"], correct: 1, topic: "Force" },
+                { q: "Gravity is a type of…", options: ["Contact force", "Non-contact force", "Push", "Friction"], correct: 1, topic: "Force" },
+
+                // Electricity (5)
+                { q: "Which is a conductor?", options: ["Plastic", "Rubber", "Copper", "Wood"], correct: 2, topic: "Electricity" },
+                { q: "Which is an insulator?", options: ["Copper", "Aluminum", "Plastic", "Iron"], correct: 2, topic: "Electricity" },
+                { q: "A switch is used to…", options: ["Make electricity", "Turn devices ON or OFF", "Store charge", "Increase voltage"], correct: 1, topic: "Electricity" },
+                { q: "Why should you not touch switches with wet hands?", options: ["Wet hands are cold", "Water lets electricity pass through you", "Switches break", "Hands get wet"], correct: 1, topic: "Electricity" },
+                { q: "Electricity flows easily through…", options: ["Insulators", "Conductors", "Air only", "Nothing"], correct: 1, topic: "Electricity" },
+
+                // Light (5)
+                { q: "Light travels in…", options: ["Circles", "Straight lines", "Zig-zags", "Curves"], correct: 1, topic: "Light" },
+                { q: "Reflection is when light…", options: ["Bends", "Bounces back", "Stops", "Speeds up"], correct: 1, topic: "Light" },
+                { q: "Refraction is when light…", options: ["Bounces", "Bends passing through different substances", "Goes around corners", "Reflects"], correct: 1, topic: "Light" },
+                { q: "Light travels at about…", options: ["300 km/s", "3,000 km/s", "300,000 km/s", "3,000,000 km/s"], correct: 2, topic: "Light" },
+                { q: "A straw in a glass of water looks 'broken' because of…", options: ["Reflection", "Refraction", "Gravity", "Wind"], correct: 1, topic: "Light" },
+
+                // Energy (5)
+                { q: "Energy is the ability to…", options: ["Be hot", "Do work or cause change", "Make noise", "Be visible"], correct: 1, topic: "Energy" },
+                { q: "Energy is measured in…", options: ["Newtons", "Joules", "Watts", "Meters"], correct: 1, topic: "Energy" },
+                { q: "Kinetic energy is the energy of…", options: ["Stored objects", "Moving objects", "Hot objects", "Light"], correct: 1, topic: "Energy" },
+                { q: "Potential energy is…", options: ["Moving energy", "Stored energy", "Heat energy", "Sound energy"], correct: 1, topic: "Energy" },
+                { q: "The Law of Conservation says energy can be…", options: ["Created", "Destroyed", "Changed from one form to another", "Lost"], correct: 2, topic: "Energy" },
+
+                // Heat (5)
+                { q: "Heat always moves from…", options: ["Cold to hot", "Hot to cold", "Side to side", "Only up"], correct: 1, topic: "Heat" },
+                { q: "Conduction is heat transfer through…", options: ["Empty space", "Direct contact", "Liquids only", "Air only"], correct: 1, topic: "Heat" },
+                { q: "Convection happens in…", options: ["Solids only", "Liquids and gases", "Empty space", "Metals"], correct: 1, topic: "Heat" },
+                { q: "Radiation can travel through…", options: ["Solids only", "Empty space", "Liquids only", "Nothing"], correct: 1, topic: "Heat" },
+                { q: "Heat from the Sun reaches us by…", options: ["Conduction", "Convection", "Radiation", "Touching"], correct: 2, topic: "Heat" }
+            ],
+            shortQs: [
+                { q: "What is force? What is its unit?", a: "Force is a push or a pull that can change an object's motion (speed/direction) or shape. Its unit is the Newton (N).", topic: "Force" },
+                { q: "Name three things a force can change about an object.", a: "Its speed, its direction, and its shape.", topic: "Force" },
+                { q: "What is the difference between a conductor and an insulator?", a: "A conductor lets electricity pass through it easily (e.g. copper). An insulator blocks electricity (e.g. plastic, rubber, wood).", topic: "Electricity" },
+                { q: "Why should you not touch a switch with wet hands?", a: "Because water lets electricity pass through it — wet hands would let the electric current pass through YOUR body and shock you.", topic: "Electricity" },
+                { q: "How does light travel?", a: "Light always travels in straight lines, at about 300,000 km per second.", topic: "Light" },
+                { q: "What is the difference between reflection and refraction?", a: "Reflection is when light BOUNCES BACK off a shiny surface (like a mirror). Refraction is when light BENDS as it passes from one substance into another (like air into water).", topic: "Light" },
+                { q: "What is energy? What is its unit?", a: "Energy is the ability to do work or cause change. Its unit is the Joule (J).", topic: "Energy" },
+                { q: "What is the Law of Conservation of Energy?", a: "Energy can NEVER be created or destroyed — it can only be changed from one form into another.", topic: "Energy" },
+                { q: "What are the three methods of heat transfer?", a: "Conduction (direct contact), Convection (through liquids and gases), and Radiation (through waves — even empty space).", topic: "Heat" },
+                { q: "In which direction does heat always move?", a: "Heat always moves from a HOTTER object to a COLDER object until both reach the same temperature.", topic: "Heat" }
+            ]
+        }
     }
 };

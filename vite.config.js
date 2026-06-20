@@ -13,7 +13,8 @@ export default defineConfig({
         math: resolve(__dirname, 'math.html'),
         biology: resolve(__dirname, 'biology.html'),
         chemistry: resolve(__dirname, 'chemistry.html'),
-        physics: resolve(__dirname, 'physics.html')
+        physics: resolve(__dirname, 'physics.html'),
+        test: resolve(__dirname, 'test.html')
       }
     }
   }
