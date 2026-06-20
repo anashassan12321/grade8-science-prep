@@ -533,7 +533,13 @@ function bindEvents() {
     const restart = document.getElementById('restart-btn');
     if (restart) restart.onclick = () => { state.phase = 'setup'; render(); };
     const done = document.getElementById('done-btn');
-    if (done) done.onclick = () => { window.location.href = `${subjectKey}.html`; };
+    if (done) done.onclick = () => {
+        if (document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.startViewTransition(() => { window.location.href = `${subjectKey}.html`; });
+        } else {
+            window.location.href = `${subjectKey}.html`;
+        }
+    };
 }
 
 // ─── boot ───────────────────────────────────────────────────────────────────

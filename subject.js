@@ -10,6 +10,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('subject-title').innerHTML =
         `${currentSubject.icon} ${currentSubject.title}`;
 
+    // Smooth View Transitions back navigation (with fallback)
+    const backLink = document.querySelector('a[href="index.html"]');
+    if (backLink) {
+        backLink.addEventListener('click', e => {
+            e.preventDefault();
+            if (document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.startViewTransition(() => { window.location.href = 'index.html'; });
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+    }
+
     const container = document.getElementById('topics-container');
     container.innerHTML = '';
 
@@ -19,11 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
             .join('');
 
         const cardHtml = `
-            <article class="card-lift slide-in-right bg-slate-800 rounded-2xl shadow-lg border border-slate-700 overflow-hidden"
+            <article class="card-lift slide-in-right bg-slate-800 rounded-2xl shadow-lg border border-slate-700 overflow-hidden relative"
                      style="animation-delay: ${tIndex * 0.08}s">
-                <header class="${currentSubject.themeBg} ${currentSubject.themeText} p-4 border-b ${currentSubject.themeBorder} flex items-center gap-3">
-                    <div class="text-3xl">${topic.emoji}</div>
-                    <h3 class="text-xl font-bold leading-tight text-white">${topic.title}</h3>
+                <header class="${currentSubject.themeBg} ${currentSubject.themeText} p-4 border-b ${currentSubject.themeBorder} flex items-center gap-3 relative overflow-hidden">
+                    <div class="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500"
+                         style="background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0) 100%); background-size: 200% 100%; animation: shimmer 2.5s linear infinite;"></div>
+                    <div class="text-3xl relative z-10">${topic.emoji}</div>
+                    <h3 class="text-xl font-bold leading-tight text-white relative z-10">${topic.title}</h3>
                 </header>
 
                 <div class="p-5 space-y-5">

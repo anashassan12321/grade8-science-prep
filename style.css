@@ -3,13 +3,16 @@
 
 /* ── Base ────────────────────────────────────────────────────────────────── */
 body {
-    font-family: 'Nunito', system-ui, -apple-system, sans-serif;  /* system fallback = instant paint */
-    background-color: #020617; /* slate-950 */
+    font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+    background-color: #020617;
     -webkit-tap-highlight-color: transparent;
-    text-rendering: optimizeSpeed;        /* skip expensive kerning on dark text */
+    text-rendering: optimizeSpeed;
 }
 
-/* Respect users who don't want motion — disables all our fancy animations. */
+/* Smooth scrolling for the whole app */
+html { scroll-behavior: smooth; }
+
+/* Respect users who don't want motion */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.001ms !important;
@@ -19,24 +22,29 @@ body {
     }
 }
 
-/* GPU-accelerate the most-animated elements so the slide-ins and glow-pulse
-   run on the compositor instead of the main thread. */
-.slide-in-right,
-.fade-in,
-.bounce-in,
-.glow-pulse,
-.float-slow,
-.float-slower {
+/* GPU-accelerate animated elements */
+.slide-in-right, .fade-in, .bounce-in, .glow-pulse,
+.float-slow, .float-slower, .animated-gradient, .star-burst {
     will-change: transform, opacity;
 }
 
-/* ═══════ PAGE-LEVEL FADES ═══════════════════════════════════════════════ */
-.fade-in {
-    animation: fadeIn 0.35s ease-out;
+/* Skip rendering of topic cards that are far below the fold — huge perf win
+   for long pages with many cards. */
+article.slide-in-right {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 480px;
 }
+
+/* Contain layout / paint on big containers so they don't repaint the world */
+#topics-container { contain: layout style; }
+#subjects-list { contain: layout style; }
+#test-content { contain: layout style; }
+
+/* ═══════ PAGE-LEVEL FADES ═══════════════════════════════════════════════ */
+.fade-in { animation: fadeIn 0.35s ease-out; }
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translate3d(0, 8px, 0); }
+    to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 /* ═══════ SLIDE-IN CARDS ═════════════════════════════════════════════════ */
@@ -49,10 +57,8 @@ body {
     to   { opacity: 1; transform: translate3d(0, 0, 0)    scale(1); }
 }
 
-/* ═══════ BOUNCE-IN (for results / popups) ═══════════════════════════════ */
-.bounce-in {
-    animation: bounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
+/* ═══════ BOUNCE-IN ═══════════════════════════════════════════════════════ */
+.bounce-in { animation: bounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
 @keyframes bounceIn {
     0%   { opacity: 0; transform: scale(0.4); }
     60%  { opacity: 1; transform: scale(1.06); }
@@ -64,11 +70,11 @@ body {
 .float-slow { animation: float 4s ease-in-out infinite; }
 .float-slower { animation: float 6s ease-in-out infinite; }
 @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-12px); }
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50%      { transform: translate3d(0, -12px, 0); }
 }
 
-/* ═══════ ANIMATED GRADIENT (for banners) ═══════════════════════════════ */
+/* ═══════ ANIMATED GRADIENT ═══════════════════════════════════════════════ */
 .animated-gradient {
     background-size: 200% 200%;
     animation: gradientShift 9s ease infinite;
@@ -78,10 +84,22 @@ body {
     50%      { background-position: 100% 50%; }
 }
 
-/* ═══════ GLOW PULSE ══════════════════════════════════════════════════════ */
-.glow-pulse {
-    animation: glowPulse 2.4s ease-in-out infinite;
+/* ═══════ ANIMATED GRADIENT TEXT (for the "Grade 8 Prep" title) ════════════ */
+.gradient-text {
+    background: linear-gradient(90deg, #fff 0%, #c7d2fe 50%, #fff 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradientText 6s ease infinite;
 }
+@keyframes gradientText {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+}
+
+/* ═══════ GLOW PULSE ══════════════════════════════════════════════════════ */
+.glow-pulse { animation: glowPulse 2.4s ease-in-out infinite; }
 @keyframes glowPulse {
     0%, 100% {
         box-shadow: 0 0 0 0 rgba(244, 63, 94, 0),
@@ -125,13 +143,22 @@ body {
 .tap-scale { transition: transform 0.12s ease-out; }
 .tap-scale:active { transform: scale(0.96); }
 
-/* ═══════ CARD HOVER LIFT ═══════════════════════════════════════════════════ */
+/* ═══════ CARD HOVER LIFT (with subtle 3D tilt wrapper) ═══════════════════ */
 .card-lift {
     transition: transform 0.3s cubic-bezier(0.34, 1.2, 0.64, 1),
                 box-shadow 0.3s ease,
                 border-color 0.3s ease;
 }
-.card-lift:hover { transform: translateY(-3px); }
+.card-lift:hover { transform: translate3d(0, -3px, 0); }
+
+/* Tilt wrapper — the inner element does the actual 3D rotation
+   (the outer needs perspective for 3D to look right). */
+.tilt-wrap { perspective: 1000px; }
+.tilt-inner {
+    transition: transform 0.15s ease-out;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
 
 /* ═══════ OPTION CHECK PULSE ═══════════════════════════════════════════════ */
 .option-pick { animation: optionPick 0.3s ease-out; }
@@ -169,7 +196,7 @@ body {
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* ═══════ GLASS HEADER (dark) ════════════════════════════════════════════════ */
+/* ═══════ GLASS HEADER ═══════════════════════════════════════════════════════ */
 .glass-header {
     background: rgba(15, 23, 42, 0.85);
     backdrop-filter: blur(10px);
@@ -180,14 +207,55 @@ body {
 /* ═══════ STAR BURST ═════════════════════════════════════════════════════════ */
 .star-burst { animation: starBurst 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
 @keyframes starBurst {
-    0%   { transform: scale(0)   rotate(0deg); }
+    0%   { transform: scale(0) rotate(0deg); }
     100% { transform: scale(1.2) rotate(360deg); }
 }
 
-/* ═══════ SUBTLE RADIAL GLOW BEHIND HERO ══════════════════════════════════════ */
+/* ═══════ HERO GLOW ══════════════════════════════════════════════════════════ */
 .hero-glow {
     position: absolute;
     inset: 0;
     pointer-events: none;
     background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.08), transparent 60%);
+}
+
+/* ═══════ SUBTLE PARTICLE SPARKLES (ambient, CSS-only) ═══════════════════ */
+.sparkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: white;
+    pointer-events: none;
+    opacity: 0;
+    animation: sparkle 4s ease-in-out infinite;
+}
+@keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0); }
+    50%      { opacity: 0.9; transform: scale(1); }
+}
+
+/* ═══════ SPINNING RING (for the result emoji / loading spinners) ════════ */
+.spin-ring { animation: spin 1.2s linear infinite; }
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ═══════ SMOOTH FOCUS RING (accessibility) ═══════════════════════════════ */
+button:focus-visible, a:focus-visible {
+    outline: 2px solid rgba(99, 102, 241, 0.6);
+    outline-offset: 2px;
+    transition: outline-color 0.15s ease;
+}
+
+/* ═══════ VIEW TRANSITIONS (smooth page swaps in supporting browsers) ═══════ */
+@media (prefers-reduced-motion: no-preference) {
+    ::view-transition-old(root) {
+        animation: vtOut 0.25s ease-out forwards;
+    }
+    ::view-transition-new(root) {
+        animation: vtIn 0.25s ease-in forwards;
+    }
+    @keyframes vtOut { to { opacity: 0; } }
+    @keyframes vtIn  { from { opacity: 0; } }
 }
