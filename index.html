@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Grade 8 Science Entry Prep</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f8fafc;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* Smooth transitions */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-in-right {
+            animation: slideInRight 0.3s forwards;
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Hide scrollbar but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Q&A Accordion transition */
+        .answer-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+        .qa-card.open .answer-content {
+            max-height: 200px;
+            padding-top: 0.75rem;
+        }
+        .qa-icon {
+            transition: transform 0.3s ease;
+        }
+        .qa-card.open .qa-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Glass effect header */
+        .glass-header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased h-screen flex flex-col overflow-hidden">
+
+    <!-- HOME PAGE -->
+    <div id="home-page" class="h-full flex flex-col overflow-y-auto no-scrollbar fade-in w-full max-w-md mx-auto relative bg-white shadow-xl">
+        <div class="px-6 pt-12 pb-8 bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-b-[2.5rem] shadow-lg relative overflow-hidden">
+            <!-- Decorative circles -->
+            <div class="absolute top-[-20px] right-[-20px] w-32 h-32 bg-white opacity-10 rounded-full"></div>
+            <div class="absolute bottom-[-30px] left-[-20px] w-24 h-24 bg-white opacity-10 rounded-full"></div>
+            
+            <h1 class="text-3xl font-extrabold mb-2 relative z-10">Entry Test Prep</h1>
+            <p class="text-indigo-100 font-medium relative z-10">Grade 8 Science Study Guide</p>
+        </div>
+
+        <div class="px-6 py-8 flex-1">
+            <h2 class="text-lg font-bold text-slate-700 mb-6">Select a Subject</h2>
+            
+            <div class="space-y-5">
+                <!-- Biology Card -->
+                <button onclick="openSubject('biology')" class="w-full bg-white border border-emerald-100 shadow-sm hover:shadow-md transition-shadow rounded-2xl p-5 flex items-center justify-between text-left group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-full bg-emerald-100 flex items-center justify-center text-3xl shadow-inner group-hover:scale-110 transition-transform">
+                            🧬
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800">Biology</h3>
+                            <p class="text-sm text-slate-500">Plants, Digestion, Circulation</p>
+                        </div>
+                    </div>
+                    <div class="text-emerald-500 text-xl font-bold group-hover:translate-x-1 transition-transform">→</div>
+                </button>
+
+                <!-- Chemistry Card -->
+                <button onclick="openSubject('chemistry')" class="w-full bg-white border border-purple-100 shadow-sm hover:shadow-md transition-shadow rounded-2xl p-5 flex items-center justify-between text-left group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-full bg-purple-100 flex items-center justify-center text-3xl shadow-inner group-hover:scale-110 transition-transform">
+                            🧪
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800">Chemistry</h3>
+                            <p class="text-sm text-slate-500">Atoms, Metals, Acids & Bases</p>
+                        </div>
+                    </div>
+                    <div class="text-purple-500 text-xl font-bold group-hover:translate-x-1 transition-transform">→</div>
+                </button>
+
+                <!-- Physics Card -->
+                <button onclick="openSubject('physics')" class="w-full bg-white border border-blue-100 shadow-sm hover:shadow-md transition-shadow rounded-2xl p-5 flex items-center justify-between text-left group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center text-3xl shadow-inner group-hover:scale-110 transition-transform">
+                            ⚡
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800">Physics</h3>
+                            <p class="text-sm text-slate-500">Force, Light, Energy, Heat</p>
+                        </div>
+                    </div>
+                    <div class="text-blue-500 text-xl font-bold group-hover:translate-x-1 transition-transform">→</div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUBJECT PAGE -->
+    <div id="subject-page" class="hidden h-full flex flex-col w-full max-w-md mx-auto relative bg-slate-50 shadow-xl z-20">
+        
+        <!-- Header -->
+        <header id="subject-header" class="glass-header sticky top-0 z-30 px-4 py-4 flex items-center justify-between">
+            <button onclick="goHome()" class="p-2 bg-white rounded-full shadow-sm text-slate-600 hover:text-slate-900 active:scale-95 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <h2 id="subject-title" class="text-xl font-extrabold flex items-center gap-2">Subject Title</h2>
+            <div class="w-10"></div> <!-- Spacer for centering -->
+        </header>
+
+        <!-- Content Area -->
+        <div id="topics-container" class="flex-1 overflow-y-auto no-scrollbar p-4 space-y-6 pb-20">
+            <!-- Topics get injected here by JS -->
+        </div>
+    </div>
+
+    <!-- DATA & LOGIC -->
+    <script>
+        const appData = {
+            biology: {
+                title: "Biology",
+                icon: "🧬",
+                themeText: "text-emerald-600",
+                themeBg: "bg-emerald-50",
+                themeBorder: "border-emerald-200",
+                themeAccent: "bg-emerald-500",
+                topics: [
+                    {
+                        title: "Transportation in Plants",
+                        emoji: "🌿",
+                        definition: "The movement of water, minerals, and food from one part of a plant to another using specialized tissues like xylem and phloem.",
+                        facts: [
+                            "<b>Xylem:</b> transports water and minerals from roots to leaves.",
+                            "<b>Phloem:</b> transports food from leaves to all parts of the plant.",
+                            "<b>Transpiration:</b> loss of water vapor from leaves.",
+                            "<b>Stomata:</b> tiny pores on leaves for gas exchange."
+                        ],
+                        eli5: "Plants don't have blood like we do. Instead, they have tiny pipes inside their stems. One pipe (Xylem) drinks up water from the dirt like a long straw. The other pipe (Phloem) takes the yummy food made in the leaves and shares it with the whole plant!",
+                        qa: [
+                            { q: "What is transpiration?", a: "The loss of water vapor from the leaves of a plant." },
+                            { q: "What is the function of stomata?", a: "They are tiny pores on leaves used for gas exchange (taking in Carbon Dioxide and releasing Oxygen)." }
+                        ],
+                        mcqs: [
+                            { q: "Which tissue carries water and minerals from the roots?", options: ["Phloem", "Xylem", "Stomata"], correct: 1 },
+                            { q: "What does phloem carry throughout the plant?", options: ["Water", "Air", "Food"], correct: 2 }
+                        ]
+                    },
+                    {
+                        title: "Digestive System",
+                        emoji: "🥪",
+                        definition: "The system that breaks down food into simpler substances so the body can absorb nutrients for energy, growth, and repair.",
+                        facts: [
+                            "<b>Main Organs:</b> Mouth, Esophagus, Stomach, Small Intestine, Large Intestine, Rectum, Anus.",
+                            "<b>Digestion starts:</b> in the mouth (chewing and saliva).",
+                            "<b>Absorption:</b> Most nutrient absorption occurs in the small intestine."
+                        ],
+                        eli5: "Your body is like a powerful engine, and food is the fuel. Digestion is a magical factory inside you that crushes the food, melts it down into an invisible soup, and pulls out all the good stuff so you have the energy to run and play!",
+                        qa: [
+                            { q: "Where does digestion begin?", a: "Digestion begins in the mouth." },
+                            { q: "Where does most nutrient absorption occur?", a: "In the small intestine." }
+                        ],
+                        mcqs: [
+                            { q: "Digestion starts in the:", options: ["Stomach", "Mouth", "Esophagus"], correct: 1 },
+                            { q: "Which organ absorbs the most nutrients?", options: ["Large Intestine", "Small Intestine", "Stomach"], correct: 1 }
+                        ]
+                    },
+                    {
+                        title: "Blood Circulatory System",
+                        emoji: "🫀",
+                        definition: "The system that transports blood, oxygen, nutrients, and wastes throughout the body.",
+                        facts: [
+                            "<b>Heart:</b> The muscular organ that pumps blood.",
+                            "<b>Arteries:</b> Carry blood <i>away</i> from the heart.",
+                            "<b>Veins:</b> Carry blood <i>toward</i> the heart.",
+                            "<b>Capillaries:</b> Tiny vessels where materials are exchanged.",
+                            "<b>Red Blood Cells:</b> Carry oxygen.",
+                            "<b>White Blood Cells:</b> Fight diseases."
+                        ],
+                        eli5: "The heart is a pump pushing a massive river of blood around your entire body. The 'red boats' in this river carry the oxygen you need to live, and the 'white boats' are the brave police officers that fight off germs and keep you from getting sick.",
+                        qa: [
+                            { q: "What is the difference between arteries and veins?", a: "Arteries carry blood away from the heart, while veins carry blood back toward the heart." },
+                            { q: "What do white blood cells do?", a: "They are part of the immune system and fight diseases and infections." }
+                        ],
+                        mcqs: [
+                            { q: "Which blood vessels carry blood away from the heart?", options: ["Veins", "Arteries", "Capillaries"], correct: 1 },
+                            { q: "What do red blood cells carry?", options: ["Wastes", "Diseases", "Oxygen"], correct: 2 }
+                        ]
+                    }
+                ]
+            },
+            chemistry: {
+                title: "Chemistry",
+                icon: "🧪",
+                themeText: "text-purple-600",
+                themeBg: "bg-purple-50",
+                themeBorder: "border-purple-200",
+                themeAccent: "bg-purple-500",
+                topics: [
+                    {
+                        title: "Atoms & Molecules",
+                        emoji: "⚛️",
+                        definition: "The fundamental building blocks of all matter in the universe.",
+                        facts: [
+                            "<b>Atom:</b> The smallest particle of an element.",
+                            "<b>Molecule:</b> Two or more atoms chemically joined together.",
+                            "<b>Examples:</b> O₂ (Oxygen gas), H₂O (Water), CO₂ (Carbon Dioxide)."
+                        ],
+                        eli5: "Atoms are the tiny invisible Lego blocks of the universe. Everything is made of them! When you snap two or more of these Lego blocks together, you create a Molecule.",
+                        qa: [
+                            { q: "What is the smallest unit of an element?", a: "An atom." },
+                            { q: "What is H₂O an example of?", a: "A molecule (specifically, water)." }
+                        ],
+                        mcqs: [
+                            { q: "The smallest particle of an element is called a/an:", options: ["Molecule", "Atom", "Cell"], correct: 1 },
+                            { q: "Two or more atoms chemically joined form a:", options: ["Compound", "Element", "Molecule"], correct: 2 }
+                        ]
+                    },
+                    {
+                        title: "Metals & Non-Metals",
+                        emoji: "🔩",
+                        definition: "Two primary categories of elements based on their physical and chemical properties.",
+                        facts: [
+                            "<b>Metal:</b> Shiny, malleable (can be hammered into sheets), ductile (can be drawn into wires), and a good conductor of heat/electricity.",
+                            "<b>Non-metal:</b> Usually dull in appearance and a poor conductor of heat/electricity.",
+                            "<b>Metal Examples:</b> Iron, Copper, Aluminum.",
+                            "<b>Non-metal Examples:</b> Oxygen, Sulfur, Carbon."
+                        ],
+                        eli5: "Metals are like superhero materials—they are strong, shiny, and let electricity zoom right through them. Non-metals are more like wood, chalk, or air; they are dull and completely block electricity.",
+                        qa: [
+                            { q: "Give three examples of metals.", a: "Iron, Copper, and Aluminum." },
+                            { q: "What does malleable mean?", a: "It means a material can be hammered or pressed permanently out of shape without breaking or cracking." }
+                        ],
+                        mcqs: [
+                            { q: "Which of these is a characteristic of metals?", options: ["Dull", "Poor Conductor", "Shiny"], correct: 2 },
+                            { q: "Which of the following is a non-metal?", options: ["Copper", "Oxygen", "Iron"], correct: 1 }
+                        ]
+                    },
+                    {
+                        title: "Acids & Bases",
+                        emoji: "🍋",
+                        definition: "Chemical compounds with opposite characteristics that react with each other.",
+                        facts: [
+                            "<b>Acid:</b> A substance that produces hydrogen ions (H+) in water.",
+                            "<b>Base:</b> A substance that produces hydroxide ions (OH-) in water.",
+                            "<b>Indicators:</b> Acids turn blue litmus paper red. Bases turn red litmus paper blue."
+                        ],
+                        eli5: "Acids usually taste sour, like lemon juice or vinegar. Bases feel slippery, like soap. They are chemical opposites! If you test them with special 'litmus' paper, acids make it turn red (danger/sour!), and bases make it turn blue.",
+                        qa: [
+                            { q: "What ion does an acid produce in water?", a: "Hydrogen ions (H+)." },
+                            { q: "What color does a base turn red litmus paper?", a: "Blue." }
+                        ],
+                        mcqs: [
+                            { q: "Acids turn blue litmus paper into which color?", options: ["Green", "Blue", "Red"], correct: 2 },
+                            { q: "Bases produce which ions in water?", options: ["Hydrogen (H+)", "Hydroxide (OH-)", "Oxygen"], correct: 1 }
+                        ]
+                    }
+                ]
+            },
+            physics: {
+                title: "Physics",
+                icon: "⚡",
+                themeText: "text-blue-600",
+                themeBg: "bg-blue-50",
+                themeBorder: "border-blue-200",
+                themeAccent: "bg-blue-500",
+                topics: [
+                    {
+                        title: "Force",
+                        emoji: "🚀",
+                        definition: "A quantitative description of an interaction that causes a change in an object's motion.",
+                        facts: [
+                            "<b>Definition:</b> Force is a push or pull acting on an object.",
+                            "<b>Unit:</b> The standard unit of force is the Newton (N).",
+                            "<b>Effects:</b> Force can change an object's speed, direction, or shape."
+                        ],
+                        eli5: "A force is simply a push or a pull. You need a force to move a toy car, to catch and stop a rolling ball, or even to squish a piece of Play-Doh into a pancake!",
+                        qa: [
+                            { q: "What is the standard unit of force?", a: "The Newton (N)." },
+                            { q: "What three things can a force change about an object?", a: "Its speed, its direction, and its shape." }
+                        ],
+                        mcqs: [
+                            { q: "Force is defined as a:", options: ["Push or pull", "Flow of electrons", "Form of energy"], correct: 0 },
+                            { q: "The unit of force is:", options: ["Joule", "Newton", "Watt"], correct: 1 }
+                        ]
+                    },
+                    {
+                        title: "Electricity",
+                        emoji: "🔌",
+                        definition: "The flow of electrical power or charge.",
+                        facts: [
+                            "<b>Electricity:</b> The flow of electric charges through a conductor.",
+                            "<b>Conductor:</b> A material that allows electricity to pass easily (e.g., Copper, Aluminum).",
+                            "<b>Insulator:</b> A material that does not allow electricity to pass (e.g., Plastic, Rubber)."
+                        ],
+                        eli5: "Electricity is like an invisible river of tiny magic sparks traveling through wires to power your TV and tablet. Conductors (like metal wires) are the open roads for the sparks, and insulators (like the plastic coating on wires) act as roadblocks to keep the sparks safely inside.",
+                        qa: [
+                            { q: "What is a conductor?", a: "A material that allows electric charges to flow through it easily." },
+                            { q: "Give an example of an insulator.", a: "Plastic, rubber, or wood." }
+                        ],
+                        mcqs: [
+                            { q: "Electricity flows easily through:", options: ["Conductors", "Insulators", "Wood"], correct: 0 },
+                            { q: "Which of the following is an insulator?", options: ["Copper", "Plastic", "Iron"], correct: 1 }
+                        ]
+                    },
+                    {
+                        title: "Light",
+                        emoji: "💡",
+                        definition: "A form of electromagnetic radiation that can be detected by the human eye.",
+                        facts: [
+                            "<b>Properties:</b> Light is a form of energy that enables us to see objects. It always travels in a straight line.",
+                            "<b>Reflection:</b> The bouncing back of light when it hits a surface (like a mirror).",
+                            "<b>Refraction:</b> The bending of light as it passes from one transparent substance into another (like air to water)."
+                        ],
+                        eli5: "Light is super-fast energy that bounces off things and jumps into your eyes so you can see colors and shapes! If it bounces off perfectly, like a mirror, that's Reflection. If it bends, like how a straw looks broken in a glass of water, that's Refraction.",
+                        qa: [
+                            { q: "How does light travel?", a: "In straight lines." },
+                            { q: "What is the difference between reflection and refraction?", a: "Reflection is the bouncing back of light, while refraction is the bending of light." }
+                        ],
+                        mcqs: [
+                            { q: "The bending of light is called:", options: ["Reflection", "Refraction", "Absorption"], correct: 1 },
+                            { q: "Light always travels in a:", options: ["Straight line", "Circle", "Zig-zag pattern"], correct: 0 }
+                        ]
+                    },
+                    {
+                        title: "Energy & Heat Transfer",
+                        emoji: "🔥",
+                        definition: "Energy is the capacity to do work, and heat transfer is how thermal energy moves across systems.",
+                        facts: [
+                            "<b>Energy:</b> The ability to do work. Forms include Heat, Light, Electrical, Chemical, Sound.",
+                            "<b>Transformation:</b> Energy can be converted from one form to another.",
+                            "<b>Heat Transfer:</b> Heat always moves from a hotter object to a colder object.",
+                            "<b>Methods of Heat Transfer:</b> Conduction (direct contact), Convection (fluids), Radiation (waves)."
+                        ],
+                        eli5: "Energy is the 'go-juice' that makes everything happen in the universe. Heat is a special kind of energy that hates being unbalanced. It will always jump from a hot thing (like hot soup) into a cold thing (like your spoon or the air) until everything is exactly the same temperature.",
+                        qa: [
+                            { q: "What is the definition of energy?", a: "The ability to do work." },
+                            { q: "In what direction does heat always flow?", a: "From a hotter object to a colder object." },
+                            { q: "What are the three methods of heat transfer?", a: "Conduction, Convection, and Radiation." }
+                        ],
+                        mcqs: [
+                            { q: "Energy is defined as:", options: ["A push or pull", "The flow of electrons", "The ability to do work"], correct: 2 },
+                            { q: "Which method of heat transfer occurs through empty space (like heat from the Sun)?", options: ["Conduction", "Convection", "Radiation"], correct: 2 }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // UI State
+        let currentSubject = null;
+
+        function openSubject(subjectKey) {
+            currentSubject = appData[subjectKey];
+            
+            // Set Header
+            document.getElementById('subject-title').innerHTML = `${currentSubject.icon} ${currentSubject.title}`;
+            
+            // Render Topics
+            const container = document.getElementById('topics-container');
+            container.innerHTML = ''; // clear
+
+            currentSubject.topics.forEach((topic, tIndex) => {
+                
+                // Build Facts List
+                const factsHtml = topic.facts.map(fact => `<li class="flex gap-2"><span class="${currentSubject.themeText}">•</span> <span>${fact}</span></li>`).join('');
+                
+                // Build Q&A Accordions
+                const qaHtml = topic.qa.map((qa, qIndex) => `
+                    <div class="qa-card bg-white border border-slate-100 rounded-lg overflow-hidden mb-2 shadow-sm">
+                        <button onclick="toggleQA(this)" class="w-full text-left p-3 font-semibold text-slate-700 flex justify-between items-center hover:bg-slate-50">
+                            <span class="flex-1 pr-4">Q: ${qa.q}</span>
+                            <svg class="qa-icon w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="answer-content bg-slate-50 px-3 pb-3 text-slate-600 text-sm">
+                            <span class="font-bold text-slate-700">A:</span> ${qa.a}
+                        </div>
+                    </div>
+                `).join('');
+
+                // Build MCQs
+                const mcqHtml = topic.mcqs.map((mcq, mIndex) => {
+                    const optionsHtml = mcq.options.map((opt, oIndex) => `
+                        <button onclick="checkMCQ(this, ${oIndex === mcq.correct})" class="mcq-btn w-full text-left p-3 border border-slate-200 rounded-lg mb-2 text-sm font-medium text-slate-600 hover:bg-slate-50 transition-colors">
+                            ${opt}
+                        </button>
+                    `).join('');
+
+                    return `
+                        <div class="mb-5 last:mb-0">
+                            <p class="font-bold text-slate-700 text-sm mb-3">${mIndex + 1}. ${mcq.q}</p>
+                            <div>${optionsHtml}</div>
+                        </div>
+                    `;
+                }).join('');
+
+                // Topic Card HTML
+                const cardHtml = `
+                    <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden slide-in-right" style="animation-delay: ${tIndex * 0.1}s">
+                        
+                        <!-- Topic Header -->
+                        <div class="${currentSubject.themeBg} ${currentSubject.themeText} p-4 border-b ${currentSubject.themeBorder} flex items-center gap-3">
+                            <div class="text-3xl">${topic.emoji}</div>
+                            <h3 class="text-xl font-bold leading-tight">${topic.title}</h3>
+                        </div>
+
+                        <div class="p-4 space-y-5">
+                            
+                            <!-- Definition & Facts -->
+                            <div>
+                                <div class="inline-block px-2 py-1 ${currentSubject.themeBg} ${currentSubject.themeText} text-xs font-bold rounded mb-2 uppercase tracking-wide">Definition</div>
+                                <p class="text-slate-700 text-sm mb-3">${topic.definition}</p>
+                                <ul class="text-sm text-slate-600 space-y-1">
+                                    ${factsHtml}
+                                </ul>
+                            </div>
+
+                            <!-- ELI5 -->
+                            <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 relative">
+                                <div class="absolute -top-3 left-4 bg-amber-100 text-amber-700 text-xs font-bold px-2 py-1 rounded-full border border-amber-200 shadow-sm flex items-center gap-1">
+                                    👶 Explain Like I'm 5
+                                </div>
+                                <p class="text-sm text-slate-600 mt-2 italic">"${topic.eli5}"</p>
+                            </div>
+
+                            <!-- Q&A Section -->
+                            <div>
+                                <h4 class="font-bold text-slate-800 mb-3 flex items-center gap-2">
+                                    <svg class="w-5 h-5 ${currentSubject.themeText}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                                    Questions & Answers
+                                </h4>
+                                ${qaHtml}
+                            </div>
+
+                            <!-- MCQ Section -->
+                            <div class="pt-4 border-t border-slate-100">
+                                <h4 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                                    <svg class="w-5 h-5 ${currentSubject.themeText}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Test Yourself (MCQs)
+                                </h4>
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                    ${mcqHtml}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHtml;
+            });
+
+            // Switch Views
+            document.getElementById('home-page').classList.add('hidden');
+            document.getElementById('subject-page').classList.remove('hidden');
+            
+            // Scroll to top
+            document.getElementById('subject-page').scrollTop = 0;
+        }
+
+        function goHome() {
+            document.getElementById('subject-page').classList.add('hidden');
+            document.getElementById('home-page').classList.remove('hidden');
+        }
+
+        function toggleQA(btn) {
+            const card = btn.closest('.qa-card');
+            card.classList.toggle('open');
+        }
+
+        function checkMCQ(btn, isCorrect) {
+            // Check if already answered
+            const container = btn.parentElement;
+            if(container.classList.contains('answered')) return;
+            
+            container.classList.add('answered');
+            
+            // Highlight the clicked button
+            if (isCorrect) {
+                btn.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
+                btn.classList.add('bg-green-500', 'text-white', 'border-green-600', 'shadow-md');
+            } else {
+                btn.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
+                btn.classList.add('bg-red-500', 'text-white', 'border-red-600');
+                
+                // Also highlight correct answer
+                const buttons = container.querySelectorAll('.mcq-btn');
+                // The correct index is tricky to find from DOM, but we can visually search it
+                // Actually, a simpler way is just to let the user learn from the mistake.
+            }
+
+            // Dim others
+            const buttons = container.querySelectorAll('.mcq-btn');
+            buttons.forEach(b => {
+                if(b !== btn) {
+                    b.classList.add('opacity-50', 'cursor-not-allowed');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
