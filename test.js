@@ -127,7 +127,7 @@ function renderSetup() {
                         </button>
                     `).join('')}
                 </div>
-                <p class="text-xs text-slate-500 mt-3">Each test has <b class="text-slate-300">10 short questions</b> in Part 2.</p>
+                <p class="text-xs text-slate-500 mt-3">MCQs only — single-part test.</p>
             </div>
         `;
     } else {
@@ -238,10 +238,11 @@ function renderPart1Done() {
     const tot = state.mcqs.length;
     const p   = pct(state.part1Correct, tot);
     const g   = grade(p);
+    const hasShort = state.shortQs.length > 0;
     return `
         <div class="space-y-5 pt-2 text-center">
-            <div class="text-6xl">🎉</div>
-            <h2 class="text-2xl font-extrabold text-white">Part 1 Complete!</h2>
+            <div class="text-6xl">${hasShort ? '🎉' : '🎯'}</div>
+            <h2 class="text-2xl font-extrabold text-white">${hasShort ? 'Part 1 Complete!' : 'Test Complete!'}</h2>
 
             <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-lg">
                 <div class="text-sm text-slate-400 uppercase tracking-wide font-bold mb-2">Your MCQ Score</div>
@@ -250,14 +251,20 @@ function renderPart1Done() {
                 <div class="mt-3 text-lg ${g.color}">${g.emoji} ${g.label}</div>
             </div>
 
-            <div class="bg-slate-800/60 rounded-2xl p-4 border border-slate-700 text-center">
-                <p class="text-sm text-slate-300">Up next: <b class="text-white">${state.shortQs.length} short questions</b></p>
-            </div>
-
-            <button id="continue-btn"
-                    class="w-full ${subject.themeAccent} text-white font-bold p-4 rounded-2xl shadow-lg active:scale-[0.98] transition-transform">
-                Continue to Part 2 →
-            </button>
+            ${hasShort ? `
+                <div class="bg-slate-800/60 rounded-2xl p-4 border border-slate-700 text-center">
+                    <p class="text-sm text-slate-300">Up next: <b class="text-white">${state.shortQs.length} short questions</b></p>
+                </div>
+                <button id="continue-btn"
+                        class="w-full ${subject.themeAccent} text-white font-bold p-4 rounded-2xl shadow-lg active:scale-[0.98] transition-transform">
+                    Continue to Part 2 →
+                </button>
+            ` : `
+                <button id="continue-btn"
+                        class="w-full ${subject.themeAccent} text-white font-bold p-4 rounded-2xl shadow-lg active:scale-[0.98] transition-transform">
+                    View Result →
+                </button>
+            `}
         </div>
     `;
 }
@@ -326,6 +333,7 @@ function renderResult() {
     const correct = state.part1Correct + state.part2Correct;
     const p = pct(correct, tot);
     const g = grade(p);
+    const hasShort = s > 0;
 
     return `
         <div class="space-y-5 pt-2 text-center">
@@ -339,18 +347,26 @@ function renderResult() {
                 <div class="text-xl text-slate-300 mt-1">${correct} / ${tot} correct</div>
             </div>
 
-            <div class="grid grid-cols-2 gap-3">
+            ${hasShort ? `
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-4">
+                        <div class="text-xs text-slate-400 uppercase font-bold">Part 1 (MCQs)</div>
+                        <div class="text-2xl font-extrabold text-white mt-1">${state.part1Correct}/${m}</div>
+                        <div class="text-sm ${grade(pct(state.part1Correct, m)).color}">${pct(state.part1Correct, m)}%</div>
+                    </div>
+                    <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-4">
+                        <div class="text-xs text-slate-400 uppercase font-bold">Part 2 (Short)</div>
+                        <div class="text-2xl font-extrabold text-white mt-1">${state.part2Correct}/${s}</div>
+                        <div class="text-sm ${grade(pct(state.part2Correct, s)).color}">${pct(state.part2Correct, s)}%</div>
+                    </div>
+                </div>
+            ` : `
                 <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-4">
-                    <div class="text-xs text-slate-400 uppercase font-bold">Part 1 (MCQs)</div>
+                    <div class="text-xs text-slate-400 uppercase font-bold">MCQs</div>
                     <div class="text-2xl font-extrabold text-white mt-1">${state.part1Correct}/${m}</div>
                     <div class="text-sm ${grade(pct(state.part1Correct, m)).color}">${pct(state.part1Correct, m)}%</div>
                 </div>
-                <div class="bg-slate-800/60 border border-slate-700 rounded-xl p-4">
-                    <div class="text-xs text-slate-400 uppercase font-bold">Part 2 (Short)</div>
-                    <div class="text-2xl font-extrabold text-white mt-1">${state.part2Correct}/${s}</div>
-                    <div class="text-sm ${grade(pct(state.part2Correct, s)).color}">${pct(state.part2Correct, s)}%</div>
-                </div>
-            </div>
+            `}
 
             <div class="grid grid-cols-2 gap-3 pt-3">
                 <button id="restart-btn"
@@ -427,9 +443,12 @@ function bindEvents() {
         }
     };
 
-    // PART 1 done → continue
+    // PART 1 done → continue (to Part 2 if there are short Qs, else straight to result)
     const cont = document.getElementById('continue-btn');
-    if (cont) cont.onclick = () => { state.phase = 'part2'; render(); };
+    if (cont) cont.onclick = () => {
+        state.phase = state.shortQs.length > 0 ? 'part2' : 'result';
+        render();
+    };
 
     // PART 2 — reveal / mark
     const reveal = document.getElementById('reveal-btn');

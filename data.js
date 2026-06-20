@@ -160,18 +160,7 @@ export const appData = {
                 { q: "Which is prime?", options: ["15", "21", "23", "25"], correct: 2, topic: "Prime/Composite" },
                 { q: "The prime factorisation of 12 is…", options: ["2 × 6", "3 × 4", "2² × 3", "2 × 2 × 2"], correct: 2, topic: "Prime/Composite" }
             ],
-            shortQs: [
-                { q: "Define a natural number and give three examples.", a: "Natural numbers are counting numbers starting from 1. Examples: 1, 2, 3 (and so on). They are written with the symbol ℕ.", topic: "Natural & Whole" },
-                { q: "How are whole numbers different from natural numbers?", a: "Whole numbers include 0 along with all natural numbers. So W = {0, 1, 2, 3, …} while ℕ = {1, 2, 3, …}. Zero is the only difference.", topic: "Natural & Whole" },
-                { q: "What is an integer? Give two positive and two negative examples.", a: "An integer is any whole number, zero, or the negative of a whole number. Positive examples: 5, 12. Negative examples: -7, -100.", topic: "Integers" },
-                { q: "Where does 0 fit in the integers — positive, negative, or neither?", a: "Zero is NEITHER positive nor negative. It sits exactly between the positive and negative integers on the number line.", topic: "Integers" },
-                { q: "Write 0.75 as a fraction. Is 0.333… rational? Why?", a: "0.75 = ¾ (a fraction, so it is rational). 0.333… is rational because it equals ⅓ — repeating decimals can always be written as a fraction.", topic: "Rational" },
-                { q: "What makes a number irrational? Give two examples.", a: "An irrational number cannot be written as a simple fraction, and its decimals go on forever without repeating. Examples: π (3.14159…) and √2 (1.41421…).", topic: "Irrational" },
-                { q: "What is a real number? Is π a real number?", a: "A real number is any number that has a place on the number line (every rational + every irrational). Yes, π is a real number.", topic: "Real" },
-                { q: "Is 0 even or odd? Explain how you know.", a: "0 is EVEN. When you divide 0 by 2 you get exactly 0 with nothing left over, which is the rule for even numbers.", topic: "Even/Odd" },
-                { q: "Define prime and composite. Is 1 prime or composite?", a: "A prime has exactly two factors: 1 and itself. A composite has more than two factors. The number 1 is NEITHER — it has only one factor.", topic: "Prime/Composite" },
-                { q: "Find the prime factorisation of 60.", a: "60 = 2 × 2 × 3 × 5  (or 2² × 3 × 5). Every factor is prime.", topic: "Prime/Composite" }
-            ]
+            shortQs: []   // Math test is MCQs only (one part, no Part 2)
         }
     },
     biology: {
