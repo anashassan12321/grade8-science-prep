@@ -168,15 +168,6 @@ function renderSetup() {
 
             ${sizeBlock}
 
-            <div class="bg-slate-800/60 rounded-2xl p-5 border border-slate-700">
-                <h3 class="font-bold text-slate-100 mb-3">📋 How it works</h3>
-                <ul class="text-sm text-slate-300 space-y-2 leading-relaxed">
-                    <li><b class="text-white">Part 1:</b> MCQs — answer each one, questions and options are randomized.</li>
-                    <li><b class="text-white">Part 2:</b> Short questions — answer to yourself, then reveal the answer and mark if you got it right.</li>
-                    <li><b class="text-white">Final:</b> Your score in both parts and overall grade.</li>
-                </ul>
-            </div>
-
             <button id="start-btn"
                     class="w-full bg-gradient-to-br ${subject.themeAccent.replace('bg-', 'from-')} ${subject.themeAccent} to-${subject.themeAccent.replace('bg-', '')} p-5 rounded-2xl shadow-lg text-white font-extrabold text-lg active:scale-[0.98] transition-transform">
                 Start Test →
@@ -229,10 +220,6 @@ function renderPart1() {
             </div>
 
             ${state.mcqSubmitted ? `
-                <div class="bg-slate-800/60 border ${q.correct === state.mcqSelected ? 'border-green-600' : 'border-red-600'} rounded-xl p-4 text-center">
-                    <div class="text-2xl mb-1">${q.correct === state.mcqSelected ? '✅ Correct!' : '❌ Wrong'}</div>
-                    <p class="text-sm text-slate-300">The correct answer is <b class="text-white">${String.fromCharCode(65 + q.correct)}. ${escapeHtml(q.options[q.correct])}</b></p>
-                </div>
                 <button id="next-btn" class="w-full ${subject.themeAccent} text-white font-bold p-4 rounded-2xl shadow-lg active:scale-[0.98] transition-transform">
                     ${i + 1 === tot ? 'See Part 1 Score →' : 'Next Question →'}
                 </button>
@@ -263,12 +250,8 @@ function renderPart1Done() {
                 <div class="mt-3 text-lg ${g.color}">${g.emoji} ${g.label}</div>
             </div>
 
-            <div class="bg-slate-800/60 rounded-2xl p-5 border border-slate-700 text-left">
-                <h3 class="font-bold text-slate-100 mb-2">📝 Up Next: Part 2</h3>
-                <p class="text-sm text-slate-300 leading-relaxed">
-                    You'll see <b class="text-white">${state.shortQs.length} short questions</b>, one at a time.
-                    Think about each one, then <b>reveal the answer</b> and tell us if you got it right.
-                </p>
+            <div class="bg-slate-800/60 rounded-2xl p-4 border border-slate-700 text-center">
+                <p class="text-sm text-slate-300">Up next: <b class="text-white">${state.shortQs.length} short questions</b></p>
             </div>
 
             <button id="continue-btn"
@@ -330,11 +313,7 @@ function renderPart2() {
                         </button>
                     </div>
                 </div>
-            ` : `
-                <button id="next-btn" class="w-full ${subject.themeAccent} text-white font-bold p-4 rounded-2xl shadow-lg active:scale-[0.98] transition-transform">
-                    ${i + 1 === tot ? 'See Final Result →' : 'Next Question →'}
-                </button>
-            `}
+            ` : ''}
         </div>
     `;
 }
@@ -460,6 +439,18 @@ function bindEvents() {
             state.shortSelfMarked = btn.dataset.mark === 'true';
             if (state.shortSelfMarked) state.part2Correct++;
             render();
+            // Auto-advance to next short Q (or to result if this was the last).
+            // 700ms gives the user a brief flash of green/red before moving on.
+            setTimeout(() => {
+                if (state.currentShortQ + 1 >= state.shortQs.length) {
+                    state.phase = 'result';
+                } else {
+                    state.currentShortQ++;
+                    state.shortRevealed = false;
+                    state.shortSelfMarked = null;
+                }
+                render();
+            }, 700);
         };
     });
 
