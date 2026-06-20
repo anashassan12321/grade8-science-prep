@@ -3,9 +3,9 @@ export const appData = {
         title: "Mathematics",
         subtitle: "Algebra, Numbers, Percentages, Ratios",
         icon: "🧮",
-        themeText: "text-rose-600",
-        themeBg: "bg-rose-50",
-        themeBorder: "border-rose-200",
+        themeText: "text-rose-400",
+        themeBg: "bg-rose-500/15",
+        themeBorder: "border-rose-800/60",
         themeAccent: "bg-rose-500",
         topics: [
             {
@@ -135,9 +135,9 @@ export const appData = {
         title: "English Language",
         subtitle: "Grammar, Tenses, Composition",
         icon: "📚",
-        themeText: "text-amber-600",
-        themeBg: "bg-amber-50",
-        themeBorder: "border-amber-200",
+        themeText: "text-amber-400",
+        themeBg: "bg-amber-500/15",
+        themeBorder: "border-amber-800/60",
         themeAccent: "bg-amber-500",
         topics: [
             {
@@ -289,9 +289,9 @@ export const appData = {
         title: "Biology",
         subtitle: "Transportation in Plants & Animals",
         icon: "🧬",
-        themeText: "text-emerald-600",
-        themeBg: "bg-emerald-50",
-        themeBorder: "border-emerald-200",
+        themeText: "text-emerald-400",
+        themeBg: "bg-emerald-500/15",
+        themeBorder: "border-emerald-800/60",
         themeAccent: "bg-emerald-500",
         topics: [
             {
@@ -362,9 +362,9 @@ export const appData = {
         title: "Chemistry",
         subtitle: "Atoms, Metals, Acids & Bases",
         icon: "🧪",
-        themeText: "text-purple-600",
-        themeBg: "bg-purple-50",
-        themeBorder: "border-purple-200",
+        themeText: "text-purple-400",
+        themeBg: "bg-purple-500/15",
+        themeBorder: "border-purple-800/60",
         themeAccent: "bg-purple-500",
         topics: [
             {
@@ -434,9 +434,9 @@ export const appData = {
         title: "Physics",
         subtitle: "Force, Light, Electricity, Energy, Heat",
         icon: "⚡",
-        themeText: "text-blue-600",
-        themeBg: "bg-blue-50",
-        themeBorder: "border-blue-200",
+        themeText: "text-blue-400",
+        themeBg: "bg-blue-500/15",
+        themeBorder: "border-blue-800/60",
         themeAccent: "bg-blue-500",
         topics: [
             {
@@ -545,9 +545,9 @@ export const appData = {
         title: "اردو (Urdu)",
         subtitle: "Grammar, Vocabulary, Writing",
         icon: "📖",
-        themeText: "text-orange-600",
-        themeBg: "bg-orange-50",
-        themeBorder: "border-orange-200",
+        themeText: "text-orange-400",
+        themeBg: "bg-orange-500/15",
+        themeBorder: "border-orange-800/60",
         themeAccent: "bg-orange-500",
         topics: [
             {

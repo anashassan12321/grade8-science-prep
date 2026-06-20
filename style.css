@@ -3,7 +3,7 @@
 
 body {
     font-family: 'Nunito', sans-serif;
-    background-color: #f8fafc;
+    background-color: #020617; /* slate-950 — darkest possible so the page edges blend */
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -46,16 +46,11 @@ body {
     overflow: hidden;
     min-height: 0;
 }
-.qa-icon {
-    transition: transform 0.3s ease;
-}
-.qa-card.open .qa-icon {
-    transform: rotate(180deg);
-}
 
-/* Glass effect header */
+/* Glass effect header (dark) */
 .glass-header {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(15, 23, 42, 0.85);   /* slate-900 w/ opacity */
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
