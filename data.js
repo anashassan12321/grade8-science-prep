@@ -185,34 +185,23 @@ export const appData = {
                 eli5: "Plants don't have blood like we do. They have tiny pipes inside their stems! One pipe (xylem) drinks up water from the dirt like a long straw. The other pipe (phloem) takes the yummy food made in the leaves and shares it with the whole plant."
             },
             {
-                title: "Transportation in Animals — Digestive System",
-                emoji: "🥪",
-                definition: "The digestive system breaks down food into simpler pieces so the body can soak up (absorb) nutrients for energy, growth, and repair.",
-                facts: [
-                    "<b>Path of food:</b> Mouth → Esophagus (food pipe) → Stomach → Small Intestine → Large Intestine → Rectum → Anus.",
-                    "<b>Digestion starts in the mouth</b> (your teeth chew the food and saliva makes it soft and wet).",
-                    "<b>Absorption (soaking up):</b> Most of the nutrients are soaked up in the <i>small intestine</i>.",
-                    "<b>Large intestine:</b> Soaks up the last bit of water and turns what is left into solid waste (faeces / poop)."
-                ],
-                eli5: "Your body is like a powerful engine, and food is the fuel. Digestion is a magical factory inside you that crushes the food, melts it down into an invisible soup, and pulls out all the good stuff so you have the energy to run and play!"
-            },
-            {
-                title: "Transportation in Animals — Blood Circulatory System",
+                title: "Transportation in Animals",
                 emoji: "🫀",
-                definition: "The system that moves blood, oxygen, nutrients and waste around your whole body using the heart and blood vessels.",
+                definition: "Animals move food, oxygen and waste around the body using TWO systems: the digestive system (breaks food down) and the blood circulatory system (carries the nutrients and oxygen to every cell).",
                 facts: [
-                    "<b>Heart:</b> A strong muscle that pumps blood (like a water pump pushing water through pipes).",
-                    "<b>Arteries:</b> Carry blood <i>away</i> from the heart (usually full of oxygen).",
-                    "<b>Veins:</b> Carry blood <i>back to</i> the heart (usually low in oxygen).",
-                    "<b>Capillaries (tiny tubes):</b> So small you need a microscope — gases, nutrients and wastes are swapped here between blood and body cells.",
-                    "<b>Red blood cells</b> carry oxygen. &nbsp; <b>White blood cells</b> fight germs."
+                    "<b>Digestive system:</b> Breaks food into simpler pieces so the body can soak up nutrients.",
+                    "<b>Digestion path:</b> Mouth → Esophagus (food pipe) → Stomach → Small Intestine → Large Intestine → Rectum → Anus.",
+                    "<b>Most nutrient absorption happens</b> in the <i>small intestine</i>; the large intestine soaks up water and forms solid waste (faeces).",
+                    "<b>Blood circulatory system:</b> The heart (a strong muscle) pumps blood through a network of vessels to every part of the body.",
+                    "<b>Arteries</b> carry blood <i>away</i> from the heart (oxygen-rich); <b>veins</b> carry blood <i>back</i> to the heart (low in oxygen); <b>capillaries</b> are tiny tubes where gases, nutrients and wastes are swapped with cells.",
+                    "<b>Red blood cells</b> carry oxygen; <b>white blood cells</b> fight germs and infections."
                 ],
-                eli5: "The heart is a pump pushing a massive river of blood around your body. The 'red boats' (red blood cells) carry oxygen, and the 'white boats' (white blood cells) are brave police officers that fight off germs!"
+                eli5: "Animals have two big transport systems working together! The digestive system is like a magical food factory that crushes food and pulls out the good stuff. The blood system is like a river — the heart is the pump, and the 'red boats' (red blood cells) carry oxygen while the 'white boats' (white blood cells) fight germs!"
             }
         ],
         testPool: {
             mcqs: [
-                // Transportation in Plants (8)
+                // Transportation in Plants (12)
                 { q: "Which tissue carries water from roots to leaves?", options: ["Phloem", "Xylem", "Stomata", "Chlorophyll"], correct: 1, topic: "Plants" },
                 { q: "What is transpiration?", options: ["Food making", "Loss of water from leaves", "Growth of roots", "Flower opening"], correct: 1, topic: "Plants" },
                 { q: "Phloem carries…", options: ["Water", "Food/sugar", "Air", "Minerals only"], correct: 1, topic: "Plants" },
@@ -221,39 +210,37 @@ export const appData = {
                 { q: "Xylem and phloem are found in…", options: ["Roots only", "Leaves only", "Stems and other parts", "Flowers only"], correct: 2, topic: "Plants" },
                 { q: "What pulls water up through the xylem?", options: ["Gravity", "Transpiration", "Wind", "Animals"], correct: 1, topic: "Plants" },
                 { q: "Which gas do plants RELEASE through stomata?", options: ["CO₂", "Nitrogen", "O₂", "Helium"], correct: 2, topic: "Plants" },
+                { q: "What is the food transported in phloem?", options: ["Water", "Sugar", "Oxygen", "Salt"], correct: 1, topic: "Plants" },
+                { q: "Which tissue carries minerals from roots to leaves?", options: ["Phloem", "Xylem", "Stomata", "Pith"], correct: 1, topic: "Plants" },
+                { q: "Where are stomata mostly found?", options: ["Roots", "Stem", "Underside of leaves", "Flowers"], correct: 2, topic: "Plants" },
+                { q: "Why is transpiration useful for plants?", options: ["Makes food", "Pulls water up from roots", "Releases oxygen", "Makes pollen"], correct: 1, topic: "Plants" },
 
-                // Digestive (8)
-                { q: "Where does digestion START?", options: ["Stomach", "Mouth", "Small intestine", "Large intestine"], correct: 1, topic: "Digestive" },
-                { q: "The esophagus is…", options: ["A stomach part", "The food pipe", "A type of food", "An organ in the brain"], correct: 1, topic: "Digestive" },
-                { q: "Where does most nutrient absorption happen?", options: ["Stomach", "Mouth", "Small intestine", "Large intestine"], correct: 2, topic: "Digestive" },
-                { q: "What does the large intestine mainly absorb?", options: ["Food", "Water", "Oxygen", "Sugar"], correct: 1, topic: "Digestive" },
-                { q: "Digestion breaks food into…", options: ["Bigger pieces", "Simpler substances", "Same size", "Waste only"], correct: 1, topic: "Digestive" },
-                { q: "Which organ turns food into faeces?", options: ["Stomach", "Small intestine", "Large intestine", "Mouth"], correct: 2, topic: "Digestive" },
-                { q: "Saliva is produced in the…", options: ["Stomach", "Mouth", "Intestine", "Liver"], correct: 1, topic: "Digestive" },
-                { q: "The small intestine is where…", options: ["Food enters", "Most absorption happens", "Waste forms", "Chewing happens"], correct: 1, topic: "Digestive" },
-
-                // Blood (9)
-                { q: "The heart is a…", options: ["Bone", "Muscle", "Liquid", "Skin"], correct: 1, topic: "Blood" },
-                { q: "Arteries carry blood…", options: ["Toward the heart", "Away from the heart", "Only downward", "Only at night"], correct: 1, topic: "Blood" },
-                { q: "Veins carry blood…", options: ["Away from the heart", "Toward the heart", "Around the lungs only", "Up only"], correct: 1, topic: "Blood" },
-                { q: "What pumps blood around the body?", options: ["Brain", "Lungs", "Heart", "Liver"], correct: 2, topic: "Blood" },
-                { q: "Red blood cells carry…", options: ["Water", "Oxygen", "Food", "Waste"], correct: 1, topic: "Blood" },
-                { q: "White blood cells…", options: ["Carry oxygen", "Fight germs", "Pump blood", "Digest food"], correct: 1, topic: "Blood" },
-                { q: "Capillaries are…", options: ["Big tubes", "Tiny tubes (need a microscope)", "Bones", "Cells"], correct: 1, topic: "Blood" },
-                { q: "Which vessel usually carries oxygen-RICH blood?", options: ["Veins", "Arteries", "Capillaries", "None"], correct: 1, topic: "Blood" },
-                { q: "The main job of blood is to…", options: ["Make you strong", "Carry oxygen, nutrients and wastes", "Make noise", "Make bones"], correct: 1, topic: "Blood" }
+                // Transportation in Animals (13)
+                { q: "Where does digestion START?", options: ["Stomach", "Mouth", "Small intestine", "Large intestine"], correct: 1, topic: "Animals" },
+                { q: "The esophagus is…", options: ["A stomach part", "The food pipe", "A type of food", "An organ in the brain"], correct: 1, topic: "Animals" },
+                { q: "Where does most nutrient absorption happen?", options: ["Stomach", "Mouth", "Small intestine", "Large intestine"], correct: 2, topic: "Animals" },
+                { q: "What does the large intestine mainly absorb?", options: ["Food", "Water", "Oxygen", "Sugar"], correct: 1, topic: "Animals" },
+                { q: "Digestion breaks food into…", options: ["Bigger pieces", "Simpler substances", "Same size", "Waste only"], correct: 1, topic: "Animals" },
+                { q: "Which organ turns food into faeces?", options: ["Stomach", "Small intestine", "Large intestine", "Mouth"], correct: 2, topic: "Animals" },
+                { q: "Saliva is produced in the…", options: ["Stomach", "Mouth", "Intestine", "Liver"], correct: 1, topic: "Animals" },
+                { q: "The heart is a…", options: ["Bone", "Muscle", "Liquid", "Skin"], correct: 1, topic: "Animals" },
+                { q: "Arteries carry blood…", options: ["Toward the heart", "Away from the heart", "Only downward", "Only at night"], correct: 1, topic: "Animals" },
+                { q: "Veins carry blood…", options: ["Away from the heart", "Toward the heart", "Around the lungs only", "Up only"], correct: 1, topic: "Animals" },
+                { q: "Red blood cells carry…", options: ["Water", "Oxygen", "Food", "Waste"], correct: 1, topic: "Animals" },
+                { q: "White blood cells…", options: ["Carry oxygen", "Fight germs", "Pump blood", "Digest food"], correct: 1, topic: "Animals" },
+                { q: "Which vessel usually carries oxygen-RICH blood?", options: ["Veins", "Arteries", "Capillaries", "None"], correct: 1, topic: "Animals" }
             ],
             shortQs: [
                 { q: "What is the job of xylem in a plant?", a: "Xylem is a tube inside the plant that carries water and minerals from the roots UP to the leaves.", topic: "Plants" },
                 { q: "What is transpiration?", a: "Transpiration is when leaves lose water vapour. This loss pulls more water up through the xylem from the roots, like sucking on a straw.", topic: "Plants" },
                 { q: "What are stomata and what do they do?", a: "Stomata are tiny holes on the underside of leaves. They let gases in and out — CO₂ in for photosynthesis, O₂ out as a waste product.", topic: "Plants" },
-                { q: "List the organs food passes through, in order.", a: "Mouth → Esophagus → Stomach → Small Intestine → Large Intestine → Rectum → Anus.", topic: "Digestive" },
-                { q: "Where does digestion start, and where does most absorption happen?", a: "Digestion starts in the mouth (teeth + saliva). Most nutrient absorption happens in the small intestine.", topic: "Digestive" },
-                { q: "What is the role of the large intestine?", a: "The large intestine soaks up the last bit of water from undigested food and turns what is left into solid waste (faeces).", topic: "Digestive" },
-                { q: "What does the heart do?", a: "The heart is a strong muscle that pumps blood around the body through the blood vessels, like a water pump pushing water through pipes.", topic: "Blood" },
-                { q: "What is the difference between arteries and veins?", a: "Arteries carry blood AWAY from the heart (usually full of oxygen). Veins carry blood BACK to the heart (usually low in oxygen).", topic: "Blood" },
-                { q: "What do red blood cells do?", a: "Red blood cells carry oxygen from the lungs to every part of the body. They give blood its red colour.", topic: "Blood" },
-                { q: "What do white blood cells do?", a: "White blood cells fight germs and infections. They are part of the body's immune (defence) system.", topic: "Blood" }
+                { q: "Name the two transport systems in animals.", a: "The digestive system (breaks food down into nutrients) and the blood circulatory system (carries the nutrients and oxygen around the body).", topic: "Animals" },
+                { q: "List the organs food passes through, in order.", a: "Mouth → Esophagus → Stomach → Small Intestine → Large Intestine → Rectum → Anus.", topic: "Animals" },
+                { q: "Where does digestion start, and where does most absorption happen?", a: "Digestion starts in the mouth (teeth + saliva). Most nutrient absorption happens in the small intestine.", topic: "Animals" },
+                { q: "What is the role of the large intestine?", a: "The large intestine soaks up the last bit of water from undigested food and turns what is left into solid waste (faeces).", topic: "Animals" },
+                { q: "What does the heart do?", a: "The heart is a strong muscle that pumps blood around the body through the blood vessels, like a water pump pushing water through pipes.", topic: "Animals" },
+                { q: "What is the difference between arteries and veins?", a: "Arteries carry blood AWAY from the heart (usually full of oxygen). Veins carry blood BACK to the heart (usually low in oxygen).", topic: "Animals" },
+                { q: "What do red blood cells and white blood cells each do?", a: "Red blood cells carry oxygen from the lungs to every part of the body. White blood cells fight germs and infections.", topic: "Animals" }
             ]
         }
     },
