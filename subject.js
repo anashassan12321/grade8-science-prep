@@ -53,22 +53,24 @@ document.addEventListener('DOMContentLoaded', () => {
         container.appendChild(div.firstElementChild);
     });
 
-    // Append "Test Me" button at the very end of the subject content
-    const testBtn = document.createElement('div');
-    testBtn.className = 'pt-2 pb-4 slide-in-right';
-    testBtn.style.animationDelay = `${currentSubject.topics.length * 0.08}s`;
-    testBtn.innerHTML = `
-        <a href="test.html?subject=${subjectKey}"
-           class="flex items-center justify-between w-full bg-gradient-to-br ${currentSubject.themeAccent} ${currentSubject.themeText.replace('text-', 'text-')} p-5 rounded-2xl shadow-lg border border-slate-700 active:scale-[0.98] transition-transform group">
-            <div class="flex items-center gap-3">
-                <div class="text-3xl">🎯</div>
-                <div>
-                    <h3 class="text-xl font-extrabold text-white">Test Me</h3>
-                    <p class="text-sm text-white/80">MCQs + short questions — randomized</p>
+    // Append "Test Me" button at the very end — only if this subject has a testPool
+    if (currentSubject.testPool) {
+        const testBtn = document.createElement('div');
+        testBtn.className = 'pt-2 pb-4 slide-in-right';
+        testBtn.style.animationDelay = `${currentSubject.topics.length * 0.08}s`;
+        testBtn.innerHTML = `
+            <a href="test.html?subject=${subjectKey}"
+               class="flex items-center justify-between w-full bg-gradient-to-br ${currentSubject.themeAccent} ${currentSubject.themeText.replace('text-', 'text-')} p-5 rounded-2xl shadow-lg border border-slate-700 active:scale-[0.98] transition-transform group">
+                <div class="flex items-center gap-3">
+                    <div class="text-3xl">🎯</div>
+                    <div>
+                        <h3 class="text-xl font-extrabold text-white">Test Me</h3>
+                        <p class="text-sm text-white/80">MCQs + short questions — randomized</p>
+                    </div>
                 </div>
-            </div>
-            <div class="text-white text-2xl font-bold group-hover:translate-x-1 transition-transform">→</div>
-        </a>
-    `;
-    container.appendChild(testBtn);
+                <div class="text-white text-2xl font-bold group-hover:translate-x-1 transition-transform">→</div>
+            </a>
+        `;
+        container.appendChild(testBtn);
+    }
 });
